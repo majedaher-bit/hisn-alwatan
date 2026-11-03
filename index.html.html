@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>حصن الوطن | بصمتك تصنع المجد</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--g:#0b5c3b;--g2:#06402a;--gold:#d9ad45;--gold2:#f6dd8e;--pearl:#f8f5ec;--sky:#6fd3ff;--bg:#04251a;--glass:rgba(255,255,255,.08);--bd:rgba(246,221,142,.28);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:radial-gradient(ellipse at top,#0b5c3b 0%,#04251a 60%,#021510 100%) fixed;color:var(--pearl);font-family:Tajawal,Tahoma,sans-serif;min-height:100vh;line-height:1.7}
+button,input,select,textarea{font:inherit}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rgba(4,37,26,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:8px;padding:8px 12px}
+header b{color:var(--gold2);font-weight:800;white-space:nowrap}
+nav{display:flex;gap:6px;overflow-x:auto;flex:1;scrollbar-width:none}
+nav a{color:var(--pearl);text-decoration:none;padding:6px 12px;border-radius:20px;white-space:nowrap;font-size:14px;border:1px solid transparent}
+nav a.on,nav a:hover{border-color:var(--gold);color:var(--gold2)}
+.ic{background:var(--glass);border:1px solid var(--bd);color:var(--gold2);border-radius:50%;width:38px;height:38px;cursor:pointer;font-size:17px}
+main{max-width:980px;margin:auto;padding:18px 14px 60px}
+.view{display:none;animation:in .6s ease}.view.on{display:block}
+@keyframes in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.card{background:var(--glass);border:1px solid var(--bd);border-radius:18px;padding:18px;backdrop-filter:blur(8px);box-shadow:0 10px 30px rgba(0,0,0,.3)}
+h1,h2{margin:.2em 0;color:var(--gold2);font-weight:800}
+.hero{text-align:center;padding:26px 8px}
+.hero h1{font-size:clamp(38px,9vw,72px);background:linear-gradient(180deg,#fff3c4,#d9ad45 60%,#a67c1e);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:none}
+.hero p{font-size:19px;margin:.3em 0}
+.btn{background:linear-gradient(180deg,#f6dd8e,#c99a2e);color:#3a2800;border:0;border-bottom:4px solid #8a6516;border-radius:14px;padding:12px 22px;font-weight:800;cursor:pointer;margin:6px;transition:transform .15s,border-width .15s;font-size:16px}
+.btn:active{transform:translateY(3px);border-bottom-width:1px}
+.btn.alt{background:var(--glass);color:var(--gold2);border:1px solid var(--gold)}
+#stage{width:100%;height:min(62vh,460px);border-radius:18px;border:1px solid var(--bd);background:linear-gradient(#0a3a5a,#04251a);touch-action:pan-y;cursor:grab;display:block}
+.stats{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:12px 0}
+.stat{min-width:130px;text-align:center}.stat b{display:block;font-size:34px;color:var(--gold2)}
+label{display:block;margin:10px 0 4px;color:var(--gold2);font-size:14px}
+input,select,textarea{width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--bd);background:rgba(0,0,0,.3);color:var(--pearl)}
+select option{color:#000}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}@media(max-width:560px){.row{grid-template-columns:1fr}}
+.msg{border-right:3px solid var(--gold);padding:10px 14px;margin:10px 0;background:rgba(0,0,0,.2);border-radius:10px}
+.tag{font-size:12px;border:1px solid var(--gold);color:var(--gold2);border-radius:10px;padding:1px 8px;margin-inline-start:6px}
+.steps{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}.steps span{padding:4px 10px;border-radius:12px;background:rgba(0,0,0,.3);font-size:13px}.steps .d{background:var(--gold);color:#3a2800}
+.back{margin-bottom:10px;display:flex;gap:6px}
+#gate{position:fixed;inset:0;z-index:50;background:radial-gradient(circle at 50% 40%,#0b5c3b,#021510);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;overflow:hidden}
+#gate.open{pointer-events:none;opacity:0;transition:opacity 1.4s .9s}
+.doors{position:absolute;inset:0;display:flex;direction:ltr;pointer-events:none}
+.doors i{flex:1;background:linear-gradient(90deg,#7a5410,#d9ad45 50%,#7a5410);border:2px solid #f6dd8e;transition:transform 1.6s cubic-bezier(.6,0,.2,1);opacity:0}
+#gate.go .doors i{opacity:1}#gate.open .doors i:first-child{transform:translateX(-100%)}#gate.open .doors i:last-child{transform:translateX(100%)}
+#gate .in{position:relative;z-index:2;transition:opacity .4s}#gate.go .in{opacity:0}
+.glow{position:fixed;inset:0;background:radial-gradient(circle,rgba(246,221,142,.7),transparent 60%);opacity:0;pointer-events:none;z-index:60}.glow.on{animation:fl 1.8s}
+@keyframes fl{50%{opacity:1}}
+#modal{position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:70;display:none;align-items:center;justify-content:center;padding:18px}#modal.on{display:flex}
+#modal .card{max-width:480px;background:#07301f}
+.soldier-hero{width:100%;max-height:460px;object-fit:cover;border-radius:16px;border:1px solid var(--bd)}
+.cert{background:#fff9e9;color:#173c2a;border:9px double #c69b35;border-radius:14px;padding:24px 18px;text-align:center;max-width:760px;margin:auto;position:relative}
+.cert h2{font-size:clamp(27px,6vw,45px);color:#8d681b}.cert .person{font-size:clamp(26px,6vw,40px);font-weight:800;color:#07452e;margin:12px 0}.cert .seal{font-size:45px}.cert .signs{display:flex;justify-content:space-around;gap:12px;flex-wrap:wrap;margin-top:28px;font-weight:700}
+@media print{body{background:white!important}header,footer,#gate,#glow,main,.no-print,#modal{display:none!important}#printCertificate{display:block!important;position:static!important;margin:0!important;padding:0!important}#printCertificate .cert{min-height:90vh;border:12px double #c69b35;display:flex;flex-direction:column;justify-content:center;box-shadow:none!important} @page{size:A4 landscape;margin:10mm}}
+footer{text-align:center;padding:20px;color:#bcd;font-size:13px;border-top:1px solid var(--bd)}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* Cinematic homepage: real links and live Supabase-backed counters */
+#v-home{--hero-gold:#f6d87e}
+.cinematic-hero{min-height:640px;position:relative;overflow:hidden;border:1px solid #b18a3a;border-radius:24px;background:linear-gradient(180deg,rgba(2,20,13,.04) 0%,rgba(2,20,13,.15) 42%,rgba(2,20,13,.92) 100%),url('castle-hero.jpg') center 28%/cover no-repeat;box-shadow:0 16px 48px #0008}
+.cinematic-hero:after{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 45% 30%,transparent 38%,#032a1b55 100%)}
+.cinematic-copy{position:absolute;z-index:1;bottom:0;left:0;right:0;text-align:center;padding:90px 20px 32px;background:linear-gradient(transparent,#042b1bdc 62%,#042b1bf5)}
+.cinematic-copy h1{font-size:clamp(43px,8vw,76px);line-height:1.15;margin:6px 0 0;color:#f7dc8c;text-shadow:0 3px 16px #000,0 0 18px #cba34288}
+.cinematic-copy h2{font-size:clamp(23px,4.5vw,38px);margin:0;color:#f8cf68;text-shadow:0 3px 12px #000}
+.cinematic-copy p{font-size:clamp(15px,2.5vw,19px);margin:8px auto 16px;max-width:560px;text-shadow:0 2px 9px #000}
+.eyebrow{font-weight:800;background:#062c20bb;border:1px solid #d9ad4577;border-radius:22px;padding:5px 14px;color:#fff0b9}
+.hero-cta{display:inline-flex;align-items:center;gap:15px;text-decoration:none;font-size:clamp(17px,3vw,23px);padding:12px 26px;box-shadow:0 0 30px #d9ad4555;animation:heroPulse 3s ease-in-out infinite}
+.hero-secondary{display:block;color:#fff2bb;margin-top:9px;text-decoration:underline;text-underline-offset:4px;font-weight:700}
+@keyframes heroPulse{50%{box-shadow:0 0 38px #f6dd8eaa;transform:translateY(-2px)}}
+.home-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:13px 0}
+.home-stat{text-align:center;background:linear-gradient(145deg,#123b2bdc,#0a241ddd);border:1px solid #d9ad4588;border-radius:17px;padding:12px 4px;min-width:0}
+.home-stat span,.home-stat b,.home-stat small{display:block}.home-stat span{font-size:23px}.home-stat b{font-size:clamp(24px,5vw,38px);color:#f5d57f;line-height:1.2}.home-stat small{font-size:12px}
+.home-features{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:12px}
+.feature{border:1px solid #d9ad4577;border-radius:16px;background:linear-gradient(145deg,#0a5337,#04251a);color:#fff5d7;text-decoration:none;overflow:hidden;display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 8px 9px;min-width:0;transition:transform .2s}
+.feature:active{transform:scale(.97)}.feature-icon{font-size:48px;display:grid;place-items:center;height:108px;width:100%;background:radial-gradient(circle,#d9ad4555,transparent 68%)}.feature img{height:108px;width:calc(100% + 16px);object-fit:cover;display:block;margin:0 -8px 0}
+.feature strong{font-size:clamp(13px,2vw,19px);margin:7px 0 2px}.feature small{font-size:12px;opacity:.88}.feature-arrow{border:1px solid #d9ad45;border-radius:50%;height:25px;width:25px;line-height:23px;color:#f8d77c;margin-top:8px}
+.national-quote{margin-top:16px;padding:46px 20px;text-align:center;border:1px solid #d9ad4577;border-radius:20px;background:linear-gradient(90deg,#03291be8,#03291b55),url('national-skyline.jpg') center/cover no-repeat;min-height:175px;text-shadow:0 2px 8px #000}
+.national-quote strong{color:#f8d77c;font-size:clamp(23px,4vw,36px)}.national-quote p{margin:7px 0 0}
+@media(max-width:640px){main{padding:12px 10px 45px}.cinematic-hero{min-height:640px;background-position:center top}.home-features{grid-template-columns:repeat(2,minmax(0,1fr))}.feature-icon,.feature img{height:116px}.cinematic-copy{padding:100px 14px 28px}}
+@media(prefers-reduced-motion:reduce){.hero-cta{animation:none}}
+
+/* Approved cinematic certificate - original design, personalized fields */
+.approved-cert{position:relative;width:100%;max-width:1100px;margin:auto;aspect-ratio:3/2;direction:rtl;overflow:hidden;background:#fff9ed}
+.approved-cert img{display:block;width:100%;height:100%;object-fit:contain}
+.approved-name,.approved-title{position:absolute;color:#073e2c;text-align:center;font-family:Tajawal,Tahoma,sans-serif;font-weight:800;line-height:1.2;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.approved-name{left:42.3%;top:55.2%;width:24%;height:7%;font-size:clamp(15px,3.3vw,41px)}
+.approved-title{left:45.4%;top:70.1%;width:16.5%;height:4.5%;font-size:clamp(10px,1.9vw,23px)}
+@media print{@page{size:A4 landscape;margin:0}html,body{margin:0!important;padding:0!important;background:white!important}#printCertificate{width:297mm!important;height:198mm!important;display:block!important;position:absolute!important;left:0;top:0}#printCertificate .approved-cert{width:297mm!important;height:198mm!important;max-width:none!important;break-inside:avoid!important;print-color-adjust:exact;-webkit-print-color-adjust:exact}#printCertificate .approved-name{font-size:31pt!important}#printCertificate .approved-title{font-size:18pt!important}}
+
+/* Mobile layout and certificate visibility fixes */
+html,body{width:100%;max-width:100%;overflow-x:hidden}
+main,.view,.card,form{min-width:0;max-width:100%}
+#v-submit>.card{width:100%}
+#v-submit input,#v-submit select,#v-submit textarea{min-width:0;max-width:100%}
+#printCertificate{display:none!important;visibility:hidden!important;position:absolute!important;left:-99999px!important;top:0!important}
+#v-submit{width:100%!important;max-width:100%!important;min-width:0!important;float:none!important;margin-inline:auto!important}
+#v-submit .card,#v-submit form{width:100%!important;max-width:100%!important}
+#v-submit .row>*{min-width:0}
+#v-submit input,#v-submit select,#v-submit textarea{font-size:16px}
+@media(max-width:640px){main{width:100%;margin:0 auto;padding:12px 12px 45px}.view{width:100%}#v-submit>.card{padding:16px 14px}.row{grid-template-columns:minmax(0,1fr)}header{max-width:100vw}nav{min-width:0}}
+@media print{#printCertificate{display:block!important;visibility:visible!important;position:absolute!important;left:0!important;top:0!important}body{overflow:visible!important}}
+
+/* On-screen certificate preview: never visible until explicitly opened. */
+.certificate-preview{display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.88);padding:env(safe-area-inset-top,12px) 10px env(safe-area-inset-bottom,12px);overflow-y:auto;align-items:flex-start;justify-content:center}
+.certificate-preview.on{display:flex}
+.certificate-dialog{width:min(100%,1040px);margin:auto;background:#0a3425;border:1px solid #d9ad45;border-radius:18px;padding:12px;color:#fff4d6;box-shadow:0 16px 60px #0008}
+.certificate-toolbar{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.certificate-preview img{display:block;width:100%;height:auto;max-height:68vh;object-fit:contain;border-radius:8px;background:#fff}
+.certificate-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:10px 0}
+.certificate-actions a.btn{display:inline-block;text-decoration:none;text-align:center}
+.certificate-hint{font-size:13px;text-align:center;margin:6px 0;opacity:.9}
+@media print{.certificate-preview{display:none!important}}
+/* Leadership portraits: isolated styles, responsive on mobile */
+.leadership-intro{text-align:center;max-width:730px;margin:0 auto 22px;color:#f8edcc}
+.leadership-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;max-width:880px;margin:20px auto}
+.leader-card{background:linear-gradient(145deg,#0b422f,#062a1e);border:2px solid #d9ad45;border-radius:22px;padding:14px;box-shadow:0 18px 40px #0006, inset 0 0 24px #f6dd8e16;text-align:center;overflow:hidden}
+.leader-card img{display:block;width:100%;height:350px;object-fit:cover;object-position:center 18%;border-radius:14px;border:1px solid #e9c36c;box-shadow:0 8px 24px #0007}
+.leader-card h3{color:#f6dd8e;margin:16px 0 4px;font-size:clamp(18px,2.3vw,25px)}
+.leader-card p{margin:0 0 10px;color:#f8f5ec;font-size:15px}
+@media(max-width:620px){.leadership-grid{grid-template-columns:1fr;max-width:420px;gap:16px}.leader-card img{height:340px}}
+
+/* Interactive fortress courtyard — phase 1 */
+.courtyard{position:relative;margin:16px 0;border:2px solid #dcb55d;border-radius:24px;overflow:hidden;min-height:570px;background:linear-gradient(180deg,#071b17aa,#04291bc9),url('castle-hero.jpg') center/cover;box-shadow:inset 0 0 85px #031c18,0 18px 45px #0007}
+.courtyard:before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 35%,#d6aa4733,transparent 65%);pointer-events:none}
+.court-heading{position:relative;text-align:center;padding:25px 12px 4px;text-shadow:0 3px 12px #000}
+.court-heading h2{font-size:clamp(28px,6vw,43px)}
+.court-grid{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;padding:22px 18px 32px}
+.court-tower{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:155px;padding:14px 7px;text-align:center;text-decoration:none;color:#fff4d0;background:linear-gradient(150deg,#13563fe8,#04251af5);border:2px solid #d9ad45;border-radius:18px;box-shadow:0 9px 18px #0007,inset 0 1px 15px #d9ad4522;transition:transform .2s,box-shadow .2s}
+.court-tower:hover,.court-tower:focus-visible{transform:translateY(-5px);box-shadow:0 15px 28px #000a,0 0 24px #d9ad4577}
+.court-tower .symbol{font-size:40px;line-height:1.4}.court-tower strong{font-size:clamp(15px,2.5vw,21px);color:#ffe4a0}.court-tower small{font-size:13px}
+@media(max-width:600px){.courtyard{min-height:auto}.court-grid{grid-template-columns:repeat(2,minmax(0,1fr));padding:12px;gap:10px}.court-tower{min-height:145px}.court-tower .symbol{font-size:35px}}
+.mission-progress{height:12px;background:#06291d;border-radius:12px;overflow:hidden;border:1px solid #d9ad45}.mission-progress span{display:block;background:linear-gradient(90deg,#b48a2d,#ffe79d);height:100%;transition:width .3s}
+.mission-answer{display:block;width:100%;text-align:right;margin:9px 0;padding:14px;border-radius:13px;border:1px solid #d9ad45;background:#0b4935;color:#fff4d0;cursor:pointer}.mission-answer:focus-visible{outline:3px solid #fff}
+.mission-answer:disabled{opacity:.65}.mission-feedback{min-height:32px;font-weight:bold;color:#ffe69a}
+
+/* Phase 2: interactive architectural landmarks, no repeated navigation cards */
+.courtyard{min-height:620px;background:linear-gradient(180deg,rgba(0,22,14,.35),rgba(0,22,14,.14) 45%,rgba(0,18,13,.94)),url('castle-hero.jpg') center center/cover no-repeat}
+.fortress-map{height:490px;position:relative;isolation:isolate}
+.fortress-hotspot{position:absolute;display:flex;align-items:center;gap:7px;flex-direction:column;justify-content:center;text-align:center;min-width:112px;min-height:75px;padding:9px 11px;border-radius:22px;color:#fff4cf;text-decoration:none;border:1px solid #ffe09e;box-shadow:0 0 0 5px #d9ad4525,0 0 26px #e5b54c88,inset 0 0 20px #ffe3a122;background:linear-gradient(145deg,#063a2de8,#08251fe8);backdrop-filter:blur(6px);transition:transform .2s,box-shadow .2s;z-index:1}
+.fortress-hotspot span{font-size:26px}.fortress-hotspot strong{font-size:13px;white-space:nowrap}.fortress-hotspot:hover,.fortress-hotspot:focus-visible{transform:scale(1.08);box-shadow:0 0 0 6px #f4d98944,0 0 35px #ffe18ecc;outline:2px solid #fff2bd}
+.spot-watch{top:8%;left:8%}.spot-challenge{top:7%;right:9%}.spot-message{top:42%;left:5%}.spot-wall{top:37%;right:7%}.spot-gallery{bottom:7%;left:14%}.spot-leaders{bottom:6%;right:14%}
+.fortress-map-tip{position:relative;text-align:center;font-size:14px;color:#f7dfa3;margin:0 10px 22px}
+@media(max-width:600px){.courtyard{min-height:550px;background-position:center}.fortress-map{height:440px}.fortress-hotspot{min-width:89px;min-height:70px;padding:7px 8px}.fortress-hotspot strong{font-size:11px}.fortress-hotspot span{font-size:23px}.spot-watch{left:4%}.spot-challenge{right:4%}.spot-message{left:2%}.spot-wall{right:2%}.spot-gallery{left:6%}.spot-leaders{right:6%}}
+#stage{touch-action:pan-y;max-height:65vh;border-radius:20px;background:radial-gradient(ellipse at 50% 35%,#205e4c,#041b16 78%)}
+#missionChoice{display:flex;flex-wrap:wrap;justify-content:center;gap:12px}#missionChoice .btn{min-width:190px;min-height:100px;border:1px solid #ffe3a0;box-shadow:0 9px 24px #0005}#missionChoice small{font-size:13px}
+
+
+/* CINEMATIC INTEGRATED DESIGN — presentation layer only; original backend and certificate remain intact */
+:root{--gold:#dfb657;--gold2:#ffe8ac;--pearl:#fff5df;--bg:#061b1c;--bd:rgba(242,197,104,.45)}
+body{background:radial-gradient(ellipse at 50% -5%,#164c53 0%,#082e2d 38%,#041a1b 85%) fixed}
+header{background:linear-gradient(100deg,#082d35f2,#031a21ed);border-bottom:1px solid #e2b45e7d;padding:12px clamp(12px,3vw,36px);box-shadow:0 12px 45px #0008}
+header>b{font-size:clamp(16px,2vw,23px);letter-spacing:.2px}
+nav a{font-size:15px;font-weight:700;padding:10px 14px}nav a.on{background:linear-gradient(160deg,#ffedb6,#c38a2b);color:#172a26;border-radius:12px}
+main{max-width:1440px;padding:18px clamp(12px,3vw,36px) 75px}
+.view{min-height:65vh}
+.card{border-radius:24px;background:linear-gradient(145deg,#0d403cdb,#062b30ee);border:1px solid #d7aa5470;box-shadow:0 16px 50px #0005,inset 0 1px #ffe4a722}
+h2{font-size:clamp(27px,4vw,43px);letter-spacing:-.5px;text-shadow:0 4px 20px #0007}
+.btn{border-radius:13px;padding:13px 22px;font-size:clamp(16px,2vw,19px);background:linear-gradient(175deg,#fff0ba,#e6b75b 56%,#b57b24);box-shadow:0 8px 22px #0004,0 0 20px #edc46b22}
+.btn.alt{background:#0a3439b8;color:#ffebbb;border-color:#dcb768}
+input,select,textarea{background:#041f25c9;border:1px solid #e7bd6780;border-radius:14px;padding:14px 16px;font-size:17px}
+input:focus,select:focus,textarea:focus{outline:2px solid #ffe5a0;outline-offset:2px}
+label{font-size:17px;font-weight:700}
+.cinematic-hero{min-height:min(77vh,760px);border:2px solid #e6bc70;border-radius:28px;background-image:linear-gradient(180deg,#061b1800 18%,#061b1844 48%,#041e21f2 96%),url('castle-hero.jpg');background-position:center 42%;box-shadow:0 28px 65px #0008,0 0 40px #e4ad3426}
+.cinematic-copy{padding:100px 18px 45px;background:linear-gradient(transparent,#041d20eb 70%)}
+.cinematic-copy h1{font-size:clamp(55px,10vw,112px);filter:drop-shadow(0 7px 4px #000a)}
+.cinematic-copy h2{font-size:clamp(25px,4vw,47px)}
+.cinematic-copy p{font-size:clamp(17px,2.4vw,24px)}
+.cinematic-copy .hero-cta{font-size:clamp(19px,2.8vw,27px);padding:17px 35px}
+.credit-ribbon{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:18px auto 12px;max-width:1000px}
+.credit-ribbon>div{background:linear-gradient(140deg,#fff4d4,#f0c980 55%,#b7802c);color:#402a11;padding:13px 18px;text-align:center;border:2px solid #fff0bd;border-radius:16px;box-shadow:0 8px 22px #0006;font-weight:900;font-size:clamp(15px,2.2vw,22px)}
+.credit-ribbon small{display:block;font-size:13px;opacity:.8}
+.home-stats{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:22px 0}
+.home-stat{background:linear-gradient(145deg,#fff2c8,#d8a951)!important;border:2px solid #fbe2a2!important;border-radius:17px!important;color:#2e2616!important;box-shadow:0 10px 25px #0005}
+.home-stat b,.home-stat small{color:#282116!important}
+.courtyard{margin-top:30px;border:1px solid #edc57999;border-radius:28px;overflow:hidden;background:linear-gradient(#061b1a44,#061b1a9a),url('castle-hero.jpg') center/cover;box-shadow:0 20px 60px #0008}
+.court-heading{padding:26px 12px 0;text-shadow:0 3px 12px #000}
+.fortress-map{min-height:520px}
+.fortress-hotspot{border:2px solid #ffdb8c!important;background:linear-gradient(145deg,#123b3bea,#06292df5)!important;box-shadow:0 0 0 4px #e9bc5533,0 0 30px #efbb6690,0 15px 30px #0009!important;min-width:130px;min-height:90px;border-radius:18px!important;animation:portalGlow 3s ease-in-out infinite}
+.fortress-hotspot span{font-size:31px!important}
+.fortress-hotspot strong{font-size:clamp(14px,1.7vw,19px)}
+@keyframes portalGlow{50%{box-shadow:0 0 0 5px #f3cb6570,0 0 48px #f6c15cdd,0 15px 30px #0009}}
+#v-mission .card,#v-submit>.card,#v-gallery,#v-heroes>.card,#v-leadership>.card,#v-about>.card,#v-admin>.card{max-width:1150px;margin:0 auto}
+#v-mission>.card,#v-heroes>.card,#v-about>.card{padding:clamp(22px,5vw,65px)}
+#missionChoice{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:30px 0}
+#missionChoice button{min-height:180px;font-size:clamp(19px,2.7vw,29px);white-space:normal;line-height:1.8}
+#missionChoice button:nth-child(1){background:linear-gradient(145deg,#a8e5bd,#e9d186)}
+#missionChoice button:nth-child(2){background:linear-gradient(145deg,#d7e8f6,#eac57b)}
+#missionChoice button:nth-child(3){background:linear-gradient(145deg,#f4ddbc,#d6a74e)}
+#v-submit>.card{padding:clamp(20px,4vw,52px);background:linear-gradient(#082b30ef,#082b30f5),url('castle-hero.jpg') center/cover}
+#v-gallery #gl{margin-top:24px}
+#v-fort{background:linear-gradient(#062526e8,#062526f5),url('castle-hero.jpg') center/cover;border:1px solid #d4ab5c;border-radius:28px;padding:clamp(18px,3vw,40px)}
+#stage{height:min(68vh,610px);border:2px solid #d6ae67;border-radius:24px}
+#v-heroes .soldier-hero{max-height:640px;object-fit:cover;box-shadow:0 18px 40px #0008}
+#v-heroes p{max-width:800px;margin:25px auto;font-size:clamp(20px,3vw,29px)!important}
+.leadership-grid{gap:22px}.leader-card{border-radius:24px!important;overflow:hidden;box-shadow:0 15px 35px #0007}
+#v-kids .kid-world,#v-museum .museum-hall,#v-wall .wall-stage{max-width:1150px;margin:0 auto;border-radius:26px;box-shadow:0 20px 55px #0007}
+#v-museum .museum-hall{background:linear-gradient(155deg,#1c443e,#0a292b 48%,#123e39);border:2px solid #e7bf73;padding:clamp(20px,4vw,50px)}
+#v-wall .wall-stage{background:linear-gradient(135deg,#0b3d34e8,#05282bee),url('castle-hero.jpg') center/cover;border:2px solid #e9c16d}
+#v-admin>.card{border:2px solid #e2b45e;padding:clamp(20px,4vw,50px)}
+#v-admin h2:before{content:'⚙️ ';font-size:.8em}
+#v-admin #al{margin-top:24px}
+footer{background:#04191c;padding:24px;font-size:15px;color:#ffe9bd}
+@media(max-width:700px){
+header{padding:8px}header>b{font-size:15px}nav a{padding:8px 10px;font-size:13px}
+main{padding:12px 10px 60px}
+.credit-ribbon{grid-template-columns:1fr;gap:7px}.credit-ribbon>div{padding:9px}
+.cinematic-hero{min-height:650px;background-position:center}
+.cinematic-copy{padding:100px 12px 28px}
+.home-stats{gap:6px}.home-stat{padding:8px 3px!important}
+.fortress-map{min-height:580px}
+.fortress-hotspot{min-width:105px;min-height:80px}
+#missionChoice{grid-template-columns:1fr;gap:10px}#missionChoice button{min-height:95px}
+#v-museum .museum-hall{padding:15px}
+}
+@media(prefers-reduced-motion:reduce){.fortress-hotspot{animation:none}}
+
+
+/* تحسين العرض السينمائي على الجوال والشاشات الواسعة دون تغيير وظائف الموقع */
+@media(min-width:1100px){
+  main{max-width:1600px;padding-inline:clamp(20px,3vw,55px)}
+  #v-home .cinematic-hero{min-height:min(82vh,900px);background-position:center 45%;border-radius:30px}
+  #v-home .cinematic-copy{padding-bottom:48px}
+  #v-home .courtyard{min-height:700px}
+  #v-home .home-stats{max-width:1200px;margin:20px auto}
+}
+@media(max-width:700px){
+  #v-home .cinematic-hero{min-height:clamp(540px,77svh,760px);background-position:51% center;border-radius:19px}
+  #v-home .cinematic-copy{padding:120px 16px 32px;background:linear-gradient(transparent,rgba(3,29,20,.76) 42%,#04251af5 100%)}
+  #v-home .cinematic-copy h1{font-size:clamp(42px,10vw,64px)}
+  #v-home .cinematic-copy h2{font-size:clamp(23px,5.4vw,34px)}
+  #v-home .hero-cta{max-width:100%;white-space:normal;justify-content:center}
+  #v-home .home-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+  #v-home .home-stat{min-width:0}
+  #v-home .courtyard{min-height:590px}
+  #v-home .fortress-hotspot{max-width:42%;font-size:clamp(12px,3vw,15px)}
+  #v-home .credit-ribbon{font-size:14px}
+}
+@media(max-width:390px){#v-home .cinematic-hero{min-height:590px}#v-home .cinematic-copy p{font-size:15px}}
+
+/* Unified visual gates and illuminated fortress illustration */
+.fortress-map .gate-visual img{width:100%;height:100%;object-fit:cover;display:block;border-radius:inherit}
+.fort-concept{max-width:1100px;margin:14px auto 22px;text-align:center}
+.fort-concept img{display:block;width:100%;height:auto;border:2px solid #d8b25d;border-radius:18px}
+.fort-concept p{font-size:14px;color:#ffe7b1;margin:8px 0}
+#paintCanvas{touch-action:none;max-width:100%;background:white;border-radius:12px}
+</style>
+
+<style>
+.journey-panel{margin:18px 0;padding:22px;border:1px solid #cba44c;border-radius:22px;background:radial-gradient(circle at 50% 0%,#176c4d,#06271c 75%);text-align:center;box-shadow:0 15px 45px #0005}
+.journey-panel h2{font-size:clamp(24px,5vw,36px)}
+.journey-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:15px 0}
+.journey-tile{padding:18px 12px;border:1px solid #d9ad4580;border-radius:18px;background:#ffffff0a;min-height:140px}
+.journey-tile .emoji{display:block;font-size:40px}
+.journey-tile strong{display:block;color:#ffe5a1}
+.journey-tile p{margin:6px 0;font-size:14px}
+.kid-choices{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.kid-choices button{border:1px solid #d9ad45;border-radius:14px;padding:12px;color:#ffe7a3;background:#0c4c35;cursor:pointer}
+.kid-choices button.chosen{background:#d9ad45;color:#142a1c}
+.wall-track{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin:14px 0}
+.wall-note{padding:18px;background:linear-gradient(145deg,#14543b,#09291e);border:1px solid #d9ad4580;border-radius:16px;animation:in .5s ease;overflow-wrap:anywhere}
+.wall-note b{color:#ffe3a0}
+.museum-filter{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0}
+.museum-filter button{padding:9px 13px;border-radius:12px;border:1px solid #d9ad45;color:#f6dd8e;background:#0a3828;cursor:pointer}
+.museum-filter button.active{background:#d9ad45;color:#183122}
+.medal-preview{max-width:420px;margin:auto;padding:25px;background:radial-gradient(circle,#14553a,#061f17);border:2px solid #d9ad45;border-radius:22px;text-align:center}
+.medal-disc{font-size:78px;filter:drop-shadow(0 5px 8px #0008)}
+@media(prefers-reduced-motion:reduce){.wall-note{animation:none}}
+</style>
+
+<style>
+/* Premium interactive sections - isolated from existing admin/certificate CSS */
+.kid-world,.premium-medal-section{background:radial-gradient(ellipse at 50% 0%,#155b42,#05271c 80%);border:1px solid #d6b363;border-radius:26px;padding:clamp(18px,4vw,36px);text-align:center;overflow:hidden}
+.kid-world h2,.premium-medal-section h2,.museum-hall h2,.wall-stage h2{color:#ffe3a1;font-size:clamp(25px,4vw,39px)}
+.kid-stars{color:#f8d57c;font-size:28px;letter-spacing:15px}
+.kid-step{position:relative;border:1px solid #d6b3636e;border-radius:22px;padding:22px;margin:18px 0;background:#ffffff09;text-align:right}
+.kid-step h3{color:#ffe4a6;font-size:21px;margin:4px 0 18px}
+.step-number{float:left;display:inline-grid;place-items:center;border-radius:50%;width:44px;height:44px;background:#d7af52;color:#123628;font-weight:bold}
+.kid-choices{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin:14px 0}
+.kid-choices button{min-height:80px;border:1px solid #cda95b;border-radius:16px;background:linear-gradient(140deg,#196347,#093726);color:#fff1c6;font-weight:bold;font-size:17px}
+.kid-choices button.chosen{background:linear-gradient(140deg,#fce3a1,#b8882b);color:#183627}
+.record-actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.kid-envelope-stage{height:170px;display:flex;justify-content:space-between;align-items:center;position:relative;padding:10px 15%}
+.kid-envelope{font-size:75px;transition:transform 1.1s cubic-bezier(.18,.7,.35,1),opacity 1.1s;filter:drop-shadow(0 8px 8px #0008)}
+.kid-envelope.fly{transform:translateX(-170px) scale(.25) rotate(-20deg);opacity:.1}
+.kid-fort{font-size:76px;filter:drop-shadow(0 10px 10px #0008)}
+.kid-note{font-size:14px;opacity:.8;line-height:1.9}
+.museum-hall{position:relative;text-align:center;padding:clamp(20px,5vw,45px);border:10px ridge #b68b44;border-radius:20px;background:repeating-linear-gradient(90deg,#0c3125 0,#104631 70px,#082a20 145px);box-shadow:inset 0 0 75px #000b,0 20px 50px #0007;min-height:500px}
+.museum-ceiling{height:14px;margin-bottom:25px;background:linear-gradient(90deg,#714519,#f8df91,#714519);border-radius:12px}
+.museum-filter{display:flex;flex-wrap:wrap;justify-content:center;gap:9px;margin:24px 0}
+.museum-filter button{padding:12px 15px;border:1px solid #e2b957;border-radius:30px;background:#092b20;color:#ffe9ae;font-weight:bold}
+.museum-filter button.active{background:linear-gradient(#ffe6a0,#c18c32);color:#123629}
+.museum-artworks{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px;perspective:900px;margin:30px 0}
+.museum-art{border:0;background:transparent;color:#fff;cursor:pointer;transform:rotateY(-4deg);transition:transform .3s}
+.museum-art:hover,.museum-art:focus-visible{transform:rotateY(0) translateY(-8px)}
+.museum-frame{display:flex;min-height:220px;flex-direction:column;justify-content:center;align-items:center;gap:12px;padding:20px;background:radial-gradient(circle,#22664a,#071e17);border:14px ridge #d2a349;outline:2px solid #ffe8a1;box-shadow:12px 18px 20px #0008,inset 0 0 30px #0008;overflow-wrap:anywhere}
+.museum-icon{font-size:62px}.museum-frame strong{font-size:20px;color:#ffecb6}.museum-frame small{color:#fff}
+.museum-empty{padding:45px 20px;border:1px dashed #d2a349;border-radius:16px;color:#ffe8b5;grid-column:1/-1}
+.museum-lightbox[hidden]{display:none!important}
+.museum-lightbox{position:fixed;inset:0;background:#000d;z-index:200000;display:grid;place-items:center;padding:15px}
+.museum-lightbox-inner{background:#0a3225;border:2px solid #d6af52;border-radius:22px;padding:20px;max-width:850px;max-height:90vh;overflow:auto;width:100%;box-sizing:border-box}
+.museum-lightbox-inner img,.museum-lightbox-inner video{max-width:100%;max-height:65vh;object-fit:contain}
+.wall-stage{background:radial-gradient(circle at center,#1b6649,#031e16 80%);border:10px ridge #bc8e39;border-radius:26px;padding:clamp(18px,4vw,40px);text-align:center;min-height:580px;box-shadow:inset 0 0 90px #0009}
+.wall-stage:fullscreen{overflow:auto;display:flex;flex-direction:column;justify-content:center}
+.wall-stars{color:#ffde85;letter-spacing:30px;font-size:34px}
+.wall-controls{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:22px 0}
+.wall-cinema{display:block;max-width:950px;margin:30px auto}
+.wall-spotlight{border:2px solid #dfb45a!important;box-shadow:0 0 45px #d5a64c44,inset 0 0 45px #d5a64c18;min-height:260px;display:flex;flex-direction:column;justify-content:center;align-items:center;animation:wallAppear .7s ease}
+.wall-spotlight h3{font-size:clamp(23px,4vw,38px);color:#ffe6a4}
+.wall-spotlight p{font-size:clamp(20px,3vw,32px);line-height:1.9}
+.wall-quote{font-size:60px;color:#dcb861}
+@keyframes wallAppear{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:none}}
+.premium-medal-section{max-width:850px;margin:auto}
+.medal-3d-scene{height:440px;display:grid;place-items:center;perspective:900px;overflow:hidden}
+.medal-3d-object{width:300px;height:365px;position:relative;transform-style:preserve-3d;animation:medalFloat 5s ease-in-out infinite;filter:drop-shadow(0 18px 22px #000a)}
+.medal-ribbon{position:absolute;top:0;left:80px;width:140px;height:195px;display:flex;justify-content:space-between;transform:translateZ(-18px)}
+.medal-ribbon i{width:62px;height:195px;background:linear-gradient(90deg,#023b28,#1d986c,#03402d);border:5px solid #d3a74b;clip-path:polygon(0 0,100% 0,100% 100%,50% 85%,0 100%)}
+.medal-face{position:absolute;top:75px;left:20px;width:260px;height:260px;border-radius:50%;background:conic-gradient(#9b5d19,#ffeeb1,#ba7c22,#fff4bc,#9a5c19,#f4c45c,#9b5d19);border:13px ridge #e2b64c;box-shadow:inset 0 0 20px #73420f,10px 15px 0 #6d4011,14px 19px 0 #3b250e;display:grid;place-items:center;transform:translateZ(25px)}
+.medal-inner{width:205px;height:205px;border-radius:50%;border:6px solid #ffe8a5;background:radial-gradient(circle at 30% 20%,#208c65,#05452f 72%);box-shadow:inset 0 0 20px #0008;display:flex;flex-direction:column;justify-content:center;align-items:center;color:#ffe4a2}
+.medal-palm{font-size:65px;filter:drop-shadow(2px 4px 2px #0007)}
+.medal-words{font-size:26px;font-weight:900}.medal-tiny{font-size:15px}
+@keyframes medalFloat{0%,100%{transform:rotateY(-15deg) rotateX(6deg) translateY(4px)}50%{transform:rotateY(18deg) rotateX(-3deg) translateY(-12px)}}
+@media(prefers-reduced-motion:reduce){.medal-3d-object,.wall-spotlight{animation:none}.kid-envelope{transition:none}}
+@media(max-width:500px){.kid-envelope-stage{padding:10px 5%}.kid-envelope.fly{transform:translateX(-100px) scale(.25)}.medal-3d-scene{height:390px}.medal-3d-object{transform:scale(.9)}}
+</style>
+<link rel="stylesheet" href="cinema.css?v=5">
+<link rel="stylesheet" href="cinema2.css?v=5">
+<style>
+.fortress-hotspot .gate-visual{display:block;width:100%;height:82px;overflow:hidden;border-radius:12px;border:2px solid #f7d48b;box-shadow:0 5px 20px #0008}
+.fortress-hotspot .gate-visual img{display:block;width:100%;height:100%;object-fit:cover}
+.fortress-hotspot{min-width:122px;max-width:155px;gap:5px}
+.fortress-hotspot strong{white-space:normal;line-height:1.3}
+.drawing-tools{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:center;margin:15px auto}
+.drawing-tools label{display:flex;align-items:center;gap:7px}
+#paintCanvas{display:block;width:100%;height:auto;aspect-ratio:10/7;background:#fff;border:4px solid #d9ad45;border-radius:15px;touch-action:none;cursor:crosshair}
+@media(max-width:600px){.fortress-hotspot{min-width:102px;max-width:124px;padding:5px}.fortress-hotspot .gate-visual{height:65px}.fortress-hotspot strong{font-size:11px}}
+
+/* Targeted mobile fixes — fortress emblem, painting swatch, heroes actions */
+.fortress-brand-emblem{width:104px;height:104px;margin:0 auto 10px;border-radius:22px;overflow:hidden;border:2px solid #f5d77c;box-shadow:0 0 26px #f4c35a88,0 10px 25px #0008;background:#123b2a}
+.fortress-brand-emblem img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
+.brand-mini-fort{display:inline-block;vertical-align:middle;width:27px;height:27px;margin-inline-end:5px;border-radius:7px;background:url('castle-hero.jpg') center/cover;border:1px solid #e7c270;box-shadow:0 0 9px #f6dd8e55}
+.heroes-actions{display:flex;flex-direction:column;align-items:center;gap:14px;margin:24px auto 5px;max-width:470px}
+.heroes-actions .btn{display:block;width:100%;margin:0;text-decoration:none;text-align:center;white-space:normal;line-height:1.6;overflow-wrap:anywhere}
+.paint-color-label{display:flex!important;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center}
+.paint-color-preview{display:inline-block;width:37px;height:37px;border:3px solid #ffe2a0;border-radius:50%;background:#0b5c3b;box-shadow:0 3px 12px #0006;flex:none}
+#paintColor{appearance:auto;-webkit-appearance:auto;display:inline-block!important;width:52px!important;height:44px!important;min-width:52px!important;padding:3px!important;background:transparent!important;border:1px solid #e7bd67!important;border-radius:12px!important;cursor:pointer;flex:none}
+#paintColor::-webkit-color-swatch-wrapper{padding:2px}
+#paintColor::-webkit-color-swatch{border:2px solid #ffe2a0;border-radius:8px}
+@media(max-width:600px){.heroes-actions{width:100%}.heroes-actions .btn{font-size:clamp(15px,4vw,19px);padding:13px 12px}.fortress-brand-emblem{width:88px;height:88px}}
+</style></head>
+<body>
+<div id="gate">
+ <div class="doors"><i></i><i></i></div>
+ <div class="in">
+  <div class="fortress-brand-emblem" aria-hidden="true"><img src="castle-hero.jpg" alt=""></div>
+  <h1 style="font-size:clamp(42px,11vw,80px)">حصن الوطن</h1>
+  <p style="font-size:20px">بصمتك تصنع المجد</p>
+  <p style="opacity:.85">«معًا نبني حصن الوفاء لوطننا الغالي»</p>
+  <button class="btn" id="enter">ابدأ رحلتك الوطنية</button>
+  <button class="btn alt" id="skip">تخطي المقدمة</button>
+ </div>
+ <p id="welcome" style="position:absolute;bottom:14%;z-index:3;opacity:0;transition:opacity 1s 1s;color:#fff3c4;font-size:20px;padding:0 16px">أهلًا بك في حصن الوطن، هنا تتحول كلمات الوفاء إلى بصمات خالدة</p>
+</div>
+<div class="glow" id="glow"></div>
+<audio id="nationalSong" src="biladi.m4a" preload="auto" loop playsinline></audio>
+
+<header>
+ <b><span class="brand-mini-fort" aria-hidden="true"></span> حصن الوطن</b>
+ <nav id="nav">
+  <a href="#home">الرئيسية</a><a href="#submit">بصمتي للوطن</a><a href="#fort">حصن الوفاء</a><a href="#gallery">المعرض</a><a href="#heroes">حماة الوطن</a><a href="#leadership">قيادة الوطن</a><a href="#mission">رحلة الوفاء</a><a href="#kids">🎙️ رسائل صوتية</a><a href="#studio">🎨 المرسم</a><a href="#about">عن المبادرة</a><a href="#certificate">الشهادة</a><a href="#admin">⚙️ الإدارة والاعتماد</a>
+ </nav>
+ <button class="ic" id="snd" title="الصوت" aria-label="تشغيل أو كتم الصوت">🔇</button>
+</header>
+
+<main>
+<section class="view" id="v-home">
+ <div class="card" id="cfg" style="display:none;margin-bottom:12px">⚙️ الموقع غير مربوط بقاعدة البيانات بعد. أضيفي رابط مشروع Supabase ومفتاح Publishable العام في قسم إعداد الاتصال داخل الملف.</div>
+ <div class="cinematic-hero" aria-label="حصن الوطن الذهبي مع العلم السعودي وحماة الوطن">
+  <div class="cinematic-copy"><span class="eyebrow">🇸🇦 مبادرة وطنية تفاعلية</span>
+   <h1>حصن الوطن</h1><h2>بصمتك تصنع المجد</h2><p>معًا نبني حصن الوفاء لوطننا الغالي، وتتحول مشاركتك المعتمدة إلى لبنة ذهبية مضيئة.</p>
+   <a class="btn hero-cta" href="#mission">ابدأ رحلتك الوطنية <span aria-hidden="true">←</span></a>
+   <a class="hero-secondary" href="#fort">استكشف الحصن ثلاثي الأبعاد ✨</a>
+  </div>
+ </div>
+<div class="credit-ribbon" aria-label="فريق المبادرة"><div><small>مديرة المدرسة</small>نسرين عبدالله المحسن</div><div><small>إعداد وتنفيذ المبادرة</small>ماجدة محمد ارحيمان</div></div>
+ <div class="home-stats" aria-label="إحصاءات حصن الوطن">
+  <div class="home-stat"><span>🎯</span><b>100</b><small>هدف الحصن</small></div>
+  <div class="home-stat"><span>🧱</span><b data-c="approved">0</b><small>لبنة مضيئة</small></div>
+  <div class="home-stat"><span>🏅</span><b id="pct">0%</b><small>اكتمال الحصن</small></div>
+  <div class="home-stat" id="pst" style="display:none"><span>📩</span><b data-c="pending">0</b><small>بانتظار المراجعة</small></div>
+ </div>
+ <div class="courtyard" aria-label="ساحة الحصن التفاعلية">
+ <div class="court-heading"><h2>ساحة حصن الوطن</h2><p>المسي أحد معالم الحصن لتبدئي تجربة مختلفة</p></div>
+ <div class="fortress-map" aria-label="اختاري أحد المعالم المضيئة للدخول إلى تجربته">
+  <a class="fortress-hotspot spot-watch" href="#heroes"><span class="gate-visual"><img src="01_basmaty.png" alt="" loading="lazy"></span><strong>برج الحماة</strong></a>
+  <a class="fortress-hotspot spot-challenge" href="#mission"><span class="gate-visual"><img src="02_haris_alwafaa.png" alt="" loading="lazy"></span><strong>ميدان الوفاء</strong></a>
+  <a class="fortress-hotspot spot-message" href="#kids"><span class="gate-visual"><img src="03_mathaf_alwafaa.png" alt="" loading="lazy"></span><strong>بوابة الرسائل</strong></a>
+  <a class="fortress-hotspot spot-wall" href="#fort"><span class="gate-visual"><img src="04_jidar_alwafaa.png" alt="" loading="lazy"></span><strong>حصن اللبنات</strong></a>
+  <a class="fortress-hotspot spot-gallery" href="#studio"><span class="gate-visual"><img src="05_almaarad.png" alt="" loading="lazy"></span><strong>مرسم الإبداع</strong></a>
+  <a class="fortress-hotspot spot-leaders" href="#leadership"><span class="gate-visual"><img src="06_rukn_alqiyada.png" alt="" loading="lazy"></span><strong>قاعة القيادة</strong></a>
+ </div><p class="fortress-map-tip">المسي المعلم المضيء للانتقال إليه · لكل معلم تجربة مختلفة</p></div>
+
+ <div class="national-quote"><strong>وطني... قصة مجد مستمرة</strong><p>كل بصمة وفاء تصنع أثرًا، وكل مشاركة معتمدة تضيء لبنة في حصن الوطن.</p></div>
+ <div class="card" style="margin-top:16px"><h2>رسالة وطنية لك</h2><button class="btn alt" id="rand">أهدني رسالة للوطن</button><div id="randOut" class="msg" style="display:none"></div></div>
+</section>
+
+
+<section class="view" id="v-mission">
+ <div class="back"><a href="#home" class="btn alt">⟵ ساحة الحصن</a></div>
+ <div class="card" style="text-align:center;background:linear-gradient(155deg,#11543d,#06271d)">
+ <h2>🧭 ميدان الوفاء</h2><p>اختر مسارك، ثم أكمل ثلاث محطات تربط المعرفة بالوفاء لحماة الوطن.</p>
+ <div id="missionChoice">
+  <button class="btn" type="button" data-track="kids">🌱 براعم الوفاء<br><small>للأطفال</small></button>
+  <button class="btn" type="button" data-track="students">📚 صنّاع الأثر<br><small>للطلاب والطالبات</small></button>
+  <button class="btn" type="button" data-track="adults">🤝 سفراء الوفاء<br><small>للمعلمين والأسر والمجتمع</small></button>
+ </div>
+ <div id="missionGame" hidden style="text-align:right;max-width:640px;margin:20px auto">
+  <div class="mission-progress"><span id="missionBar" style="width:0%"></span></div>
+  <p id="missionStep" style="color:#ffe6a3"></p><h2 id="missionQuestion"></h2>
+  <div id="missionAnswers"></div><p class="mission-feedback" id="missionFeedback" role="status"></p>
+  <button class="btn alt" type="button" id="missionBack">تغيير المسار</button>
+ </div>
+ <div id="missionDone" hidden><h2>✨ أتممت رحلة الوفاء!</h2><p id="missionResult"></p>
+  <a class="btn" href="#submit">✉️ أرسل رسالة شكر لحماة الوطن</a>
+  <button class="btn alt" type="button" id="missionAgain">اختر مسارًا آخر</button>
+ </div></div>
+</section>
+
+<section class="view" id="v-submit">
+ <div class="back"><a href="#home"><button class="btn alt">⟵ الرئيسية</button></a></div>
+ <div class="card"><h2>بصمتي للوطن</h2>
+  <form id="f" onsubmit="return false">
+   <div class="row"><div><label>الاسم المعروض</label><input id="fn" required maxlength="40"></div>
+   <div><label>الفئة</label><select id="fc"><option>طالب</option><option>طالبة</option><option>معلم</option><option>معلمة</option><option>ولي أمر</option><option>قائد مدرسي</option><option>فرد من المجتمع</option></select></div></div>
+   <div class="row"><div><label>المنطقة (اختيارية)</label><select id="fr"><option value="">—</option><option>الرياض</option><option>مكة المكرمة</option><option>المدينة المنورة</option><option>القصيم</option><option>الشرقية</option><option>عسير</option><option>تبوك</option><option>حائل</option><option>الحدود الشمالية</option><option>جازان</option><option>نجران</option><option>الباحة</option><option>الجوف</option></select></div>
+   <div><label>نوع المشاركة</label><select id="ft"><option>رسالة مكتوبة</option><option>قصيدة أو خاطرة</option><option>رسالة إلى جنودنا</option><option>رسم فني</option><option>تسجيل صوتي</option><option>صورة</option><option>فيديو قصير</option></select></div></div>
+   <label>عنوان المشاركة</label><input id="fh" required maxlength="60">
+   <label>نص المشاركة أو وصف مختصر</label><textarea id="fx" rows="5" required maxlength="800"></textarea>
+   <label>صورة أو تسجيل أو فيديو (اختياري: صور 10MB · صوت 15MB · فيديو 50MB)</label><input type="file" id="ff" accept="image/*,video/*,audio/*"><input id="hp" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;width:1px" aria-hidden="true">
+   <label style="display:flex;gap:8px;align-items:center"><input type="checkbox" id="fa" style="width:auto" required> أوافق على شروط النشر، وأن مشاركة الطفل بموافقة ولي أمره، وعدم إدراج معلومات شخصية أو عسكرية حساسة.</label>
+   <button class="btn" id="send">أرسل بصمتي</button>
+  </form>
+  <div id="journey" class="steps" style="display:none"></div>
+  <div id="certificateReady" class="card" style="display:none;margin-top:16px;text-align:center"><h2>🎖️ شهادتك جاهزة!</h2><p>تم استلام بصمتك بنجاح. يمكنك استخراج شهادة المشاركة الآن، أما نشر البصمة فينتظر موافقة الإدارة.</p><button class="btn" id="getCert" type="button">عرض شهادة مشاركتي وتحميلها</button></div>
+ </div>
+</section>
+
+<section class="view" id="v-certificate"><div class="back"><a href="#home" class="btn alt">⟵ الرئيسية</a></div><div class="card" style="text-align:center"><h2>🏅 شهادة المشاركة</h2><p>شهادة تذكارية لكل مشارك بعد إرسال بصمته. نشر المشاركة في المعرض يحتاج اعتماد الإدارة.</p><img src="certificate-approved.png" alt="التصميم الذهبي المعتمد لشهادة حصن الوطن" style="width:100%;max-width:800px;border-radius:15px;border:2px solid #d9ad45"><p id="certificatePageStatus">للحصول على شهادة باسمك، أرسلي بصمتك أولًا.</p><button type="button" class="btn" id="certificatePageDownload">عرض شهادتي وتحميلها</button> <a class="btn alt" href="#submit">إرسال بصمة جديدة</a></div></section>
+<section class="view" id="v-studio"><div class="back"><a class="btn alt" href="#home">⟵ الرئيسية</a></div><div class="card" style="text-align:center"><h2>🎨 مرسم حماة الوطن</h2><p>ارسمي لوحة تعبّر عن امتنانك لحماة الوطن، ثم أرسليها للمراجعة.</p><label for="artistName">اسم المشاركة</label><input id="artistName" maxlength="40" placeholder="اسم الطالبة أو المشارك"><div class="drawing-tools"><label class="paint-color-label">اللون <span id="paintColorPreview" class="paint-color-preview" aria-hidden="true"></span><input type="color" id="paintColor" value="#0b5c3b" aria-label="اختيار لون الفرشاة"></label><label>حجم الفرشاة <input type="range" id="paintSize" min="2" max="30" value="7"></label><button type="button" class="btn alt" id="paintUndo">تراجع</button><button type="button" class="btn alt" id="paintClear">مسح اللوحة</button></div><canvas id="paintCanvas" width="1000" height="700" aria-label="لوحة رسم تفاعلية باللمس"></canvas><p><button type="button" class="btn" id="paintSubmit">إرسال لوحتي للمراجعة</button> <button type="button" class="btn alt" id="paintSave">حفظ الصورة</button></p><small>لا تُنشر اللوحة إلا بعد موافقة الإدارة. يرجى موافقة ولي الأمر على مشاركات الأطفال.</small></div></section>
+<section class="view" id="v-fort">
+ <div class="back"><a href="#home"><button class="btn alt">⟵ الرئيسية</button></a></div>
+ <h2>حصن الوفاء التفاعلي</h2>
+ <div class="fort-concept"><img src="fortress-illumination-preview.png" alt="تصور فني للحصن المضيء ومراحل تطوره" loading="lazy"><p>تصور فني للحصن عند ازدياد المشاركات. الحصن ثلاثي الأبعاد بالأسفل يعرض اللبنات الفعلية المعتمدة.</p></div>
+ <canvas id="stage" aria-label="حصن ثلاثي الأبعاد"></canvas>
+ <p style="text-align:center;opacity:.8;font-size:14px">اسحب للتدوير · اضغط على لبنة لقراءة البصمة</p>
+ <div class="stats"><div class="card stat"><b data-c="approved">0</b>لبنة مضيئة</div><div class="card stat"><b id="pct2">0%</b>هدف الحصن: <span id="goalTxt"></span></div></div>
+</section>
+
+<section class="view" id="v-gallery">
+ <div class="back"><a href="#home"><button class="btn alt">⟵ الرئيسية</button></a></div>
+ <h2>معرض الإبداع الوطني</h2>
+ <input id="q" placeholder="ابحث بالعنوان…">
+ <div id="gl"></div>
+</section>
+
+<section class="view" id="v-heroes">
+ <div class="back"><a href="#home"><button class="btn alt">⟵ الرئيسية</button></a></div>
+ <div class="card" style="text-align:center"><h2>🇸🇦 حماة الوطن.. فخرنا وأماننا</h2>
+ <img src="homat-alwatan.webp" class="soldier-hero" alt="مشهد وطني سينمائي لجنود الوطن" loading="lazy">
+ <p style="font-size:20px">إلى جنودنا البواسل، أنتم درع الوطن وعنوان عزته. شكرًا لسهرِكم وتضحياتكم في سبيل أمنه وسلامته.</p>
+ <div class="heroes-actions"><a class="btn" href="#kids">أرسل رسالة صوتية إلى حماة الوطن</a><a class="btn alt" href="#submit">اكتب رسالة إلى حماة الوطن</a></div></div>
+</section>
+<section class="view" id="v-leadership">
+ <div class="back"><a href="#home"><button class="btn alt">⟵ الرئيسية</button></a></div>
+ <div class="card"><h2 style="text-align:center">🇸🇦 قيادة الوطن.. عزٌّ وأمان</h2>
+  <p class="leadership-intro">قيادة حكيمة.. ووطن آمن.. وحماة نفخر بهم.</p>
+  <div class="leadership-grid">
+   <article class="leader-card"><img src="king-salman.webp" alt="صورة خادم الحرمين الشريفين الملك سلمان بن عبدالعزيز" loading="lazy"><h3>خادم الحرمين الشريفين</h3><p>الملك سلمان بن عبدالعزيز آل سعود</p></article>
+   <article class="leader-card"><img src="crown-prince.webp" alt="صورة صاحب السمو الملكي الأمير محمد بن سلمان" loading="lazy"><h3>صاحب السمو الملكي ولي العهد</h3><p>الأمير محمد بن سلمان بن عبدالعزيز آل سعود</p></article>
+  </div>
+  <p style="text-align:center;opacity:.8;font-size:13px">صور مقدمة من مُعدّة المبادرة. هذا الركن تعريفي ولا يُعدّ إعلانًا عن اعتماد رسمي للمبادرة.</p>
+ </div>
+</section>
+<section class="view" id="v-about">
+ <div class="back"><a href="#home"><button class="btn alt">⟵ الرئيسية</button></a></div>
+ <div class="card"><h2>عن المبادرة</h2>
+  <p>منصة وطنية تجمع رسائل المحبة والولاء والامتنان للوطن، وتحوّل كل مشاركة معتمدة إلى لبنة في حصن الوفاء.</p>
+  <p><b>الجهة المنظمة:</b> الابتدائية الرابعة بالقطيف<br><b>إعداد وتنفيذ:</b> ماجدة محمد ارحيمان<br><b>مديرة المدرسة:</b> نسرين عبدالله المحسن</p>
+  <p style="opacity:.75;font-size:13px">تتضمن شهادة المشاركة شعار وزارة التعليم وشعار المدرسة ضمن تصميم أعدّته معدّة المبادرة. المبادرة مدرسية ولا تدّعي اعتمادًا رسميًا من أي جهة.</p></div>
+</section>
+
+
+<section class="view" id="v-kids">
+ <div class="back"><a class="btn alt" href="#home">⟵ الرئيسية</a></div>
+ <div class="kid-world">
+  <div class="kid-stars" aria-hidden="true">✦　✧　✦</div>
+  <h2>💌 من قلب طفل إلى حامي الوطن</h2><p>رحلة شكر صغيرة، وأثرها كبير. اختر رسالة أو سجّل صوتك، ثم أرسلها للمراجعة.</p>
+  <div class="kid-step"><span class="step-number">١</span><h3>من الذي يرسل الرسالة؟</h3><label for="kidName">اسم الطفل المعروض (بموافقة ولي الأمر)</label><input id="kidName" maxlength="40" placeholder="اسم الطفل"></div>
+  <div class="kid-step"><span class="step-number">٢</span><h3>ماذا تقول لحامي الوطن؟</h3>
+   <div class="kid-choices" id="kidChoices">
+    <button type="button" data-kid="شكرًا يا حامي الوطن لأنك تحمي وطننا وتمنحنا الأمان.">🛡️ شكرًا لحمايتنا</button>
+    <button type="button" data-kid="يا حامي الوطن، ندعو الله أن يحفظك ويعيدك سالمًا.">💚 دعاء من القلب</button>
+    <button type="button" data-kid="أفتخر بحماة وطني وبشجاعتهم وتضحياتهم.">🇸🇦 أنا فخور بكم</button>
+   </div><label for="kidText">رسالتك الجميلة</label><textarea id="kidText" rows="3" maxlength="800" placeholder="اختر بطاقة أو اكتب رسالتك"></textarea>
+  </div>
+  <div class="kid-step"><span class="step-number">٣</span><h3>أسمعنا صوتك (اختياري)</h3>
+   <div class="record-actions"><button type="button" id="kidRecord" class="btn alt">🎙️ ابدأ التسجيل</button><button type="button" id="kidStop" class="btn alt" disabled>⏹ إيقاف</button><button type="button" id="kidClearAudio" class="btn alt" style="display:none">حذف التسجيل</button></div>
+   <p id="kidRecordStatus" aria-live="polite">يمكنك تسجيل رسالة قصيرة تصل إلى 60 ثانية. يتطلب التسجيل السماح باستخدام الميكروفون.</p><audio id="kidPlayback" controls style="display:none;width:100%"></audio>
+  </div>
+  <div class="kid-envelope-stage" aria-hidden="true"><div id="kidEnvelope" class="kid-envelope"><span>💌</span></div><div class="kid-fort">🏰</div></div>
+  <button type="button" id="kidContinue" class="btn">✨ ضع رسالتي في ظرف الوفاء</button>
+  <p class="kid-note">بعد الانتقال إلى نموذج المشاركة، وافق على الشروط واضغط «أرسل بصمتي». لا تظهر المشاركة للزوار قبل اعتماد الإدارة.</p>
+ </div>
+</section>
+<section class="view" id="v-museum">
+ <div class="back"><a class="btn alt" href="#home">⟵ الرئيسية</a></div>
+ <div class="museum-hall"><div class="museum-ceiling"></div><h2>متحف رسائل الوفاء</h2><p>تجوّل بين أعمال الشكر المعتمدة، واضغط على أي لوحة لفتحها.</p>
+  <div class="museum-filter" id="museumFilters"><button class="active" data-filter="all">كل القاعات</button><button data-filter="image">🎨 لوحات الفن</button><button data-filter="video">🎬 السينما</button><button data-filter="audio">🎧 الأصوات</button><button data-filter="text">✉️ الرسائل</button></div>
+  <div id="museumItems" class="museum-artworks"></div>
+ </div>
+ <div id="museumLightbox" class="museum-lightbox" role="dialog" aria-modal="true" aria-label="تفاصيل العمل" hidden><div class="museum-lightbox-inner"><button id="museumClose" type="button" class="btn alt">إغلاق ✕</button><div id="museumDetail"></div></div></div>
+</section>
+<section class="view" id="v-wall">
+ <div class="back"><a class="btn alt" href="#home">⟵ الرئيسية</a></div>
+ <div class="wall-stage" id="wallStage"><div class="wall-stars" aria-hidden="true">✦ ✧ ✦</div><h2>جدار الوفاء لحماة الوطن</h2><p>كلمات شكر من أبناء الوطن إلى من يحمونه.</p>
+  <div class="wall-controls"><button type="button" id="wallPlay" class="btn">⏸ إيقاف العرض التلقائي</button><button type="button" id="wallNext" class="btn alt">التالي ←</button><button type="button" id="wallFullscreen" class="btn alt">⛶ ملء الشاشة</button></div>
+  <div id="wallItems" class="wall-track wall-cinema" aria-live="polite"></div>
+  <small>تظهر هنا المشاركات المعتمدة فقط. العرض يتجدد تلقائيًا كل 8 ثوانٍ.</small>
+ </div>
+</section>
+<section class="view" id="v-medal">
+ <div class="back"><a class="btn alt" href="#home">⟵ الرئيسية</a></div>
+ <div class="premium-medal-section"><h2>وسام حارس الوفاء الصغير</h2><p>وسام تذكاري مستقل عن شهادة المشاركة الأصلية.</p>
+  <div class="medal-3d-scene" aria-label="ميدالية ذهبية مجسمة تدور عند اللمس">
+   <div class="medal-3d-object" id="medal3D">
+    <div class="medal-ribbon"><i></i><i></i></div>
+    <div class="medal-face"><div class="medal-inner"><div class="medal-palm">🌴</div><div class="medal-words">حارس الوفاء</div><div class="medal-tiny">حصن الوطن</div></div></div>
+   </div>
+  </div>
+  <label for="medalName">اسم المشارك على الوسام</label><input id="medalName" maxlength="40" placeholder="اكتب اسم المشارك">
+  <button id="makeMedal" class="btn">✨ إنشاء وسامي الذهبي</button><div id="medalResult"></div>
+  <p class="kid-note">الوسام تذكاري للمشاركة، ولا يعني اعتماد المحتوى للنشر.</p>
+ </div>
+</section>
+<section class="view" id="v-admin">
+ <div class="back"><a href="#home"><button class="btn alt">⟵ الرئيسية</button></a></div>
+ <div class="card"><h2>لوحة التحكم الإدارية</h2>
+  <div id="login"><label>البريد الإلكتروني</label><input id="le" type="email" autocomplete="username"><label>كلمة المرور</label><input id="lp" type="password" autocomplete="current-password"><button class="btn" id="lg">دخول</button></div>
+  <div id="panel" style="display:none"><button class="btn alt" id="lo">تسجيل الخروج</button><button class="btn alt" id="lc">🧹 تنظيف الملفات اليتيمة</button><div style="margin:14px 0;display:flex;gap:8px;flex-wrap:wrap"><button type="button" class="btn" id="showPending">📥 بانتظار المراجعة</button><button type="button" class="btn alt" id="showHistory">📁 سجل المشاركات السابقة</button></div><p id="adminQueueTitle" style="margin:10px 0"></p><div id="al"></div></div></div>
+</section>
+</main>
+<footer>الابتدائية الرابعة بالقطيف · إعداد وتنفيذ: ماجدة محمد ارحيمان · مديرة المدرسة: نسرين عبدالله المحسن</footer>
+<div id="printCertificate" style="display:none"></div>
+<div id="modal"><div class="card"><div id="mb"></div><button class="btn" onclick="document.getElementById('modal').classList.remove('on')">إغلاق</button></div></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+const $=s=>document.querySelector(s),GOAL=100;
+// إعداد الاتصال: الصقي رابط المشروع والمفتاح العام Publishable هنا فقط.
+// لا تضعي Secret key أو service_role في هذا الملف.
+const SUPABASE_URL='https://phedhelvxhemghsjjdle.supabase.co';
+const SUPABASE_ANON_KEY='sb_publishable_fOeHkLPSEkkZiyohxlucCw_6tpaqk4b';
+const CONFIGURED=SUPABASE_URL.startsWith('https://') && !SUPABASE_ANON_KEY.startsWith('PASTE');
+let sb=null,DB=[],ADMIN=false;
+if(CONFIGURED&&window.supabase)sb=supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
+async function ensureUser(){let {data:{session}}=await sb.auth.getSession();if(!session){const r=await sb.auth.signInAnonymously();if(r.error)throw r.error;session=r.data.session}return session.user.id}
+async function hydrate(){if(!sb)return;for(const e of document.querySelectorAll('[data-mp]:not([src])')){const {data}=await sb.storage.from('media').createSignedUrl(e.dataset.mp,3600);if(data)e.src=data.signedUrl}}
+const mapR=r=>({id:r.id,n:r.name,c:r.category,r:r.region||'',t:r.type,h:r.title,x:r.body,s:r.status,mp:r.media_path,mt:r.media_type});
+const toast=m=>{$('#mb').innerHTML='<p>'+esc(m)+'</p>';$('#modal').classList.add('on')};
+const media=d=>!d.mp||!sb?'':d.mt==='image'?`<img data-mp="${d.mp}" style="max-width:100%;border-radius:10px" loading="lazy" alt="">`:d.mt==='video'?`<video data-mp="${d.mp}" controls playsinline preload="metadata" style="max-width:100%;border-radius:10px"></video>`:`<audio data-mp="${d.mp}" controls style="width:100%"></audio>`;
+async function load(){if(!sb){render();return}
+ const {data,error}=await sb.from('submissions').select('id,name,category,region,type,title,body,media_path,media_type,status,created_at').order('created_at',{ascending:false});
+ if(error)toast('تعذر تحميل البيانات: '+error.message);else DB=data.map(mapR);render()}
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const ap=()=>DB.filter(d=>d.s==='approved');
+// Audio starts from a real user gesture (Safari requirement). Navigation does not restart it.
+const song=$('#nationalSong');
+const soundButton=$('#snd');
+let soundWanted=true;
+function updateSoundButton(){
+ const playing=!song.paused&&!song.muted;
+ soundButton.textContent=playing?'🔊':'🔇';
+ soundButton.setAttribute('aria-label',playing?'كتم أغنية بلادي':'تشغيل أغنية بلادي');
+ soundButton.setAttribute('aria-pressed',String(playing));
+}
+function startSong(){
+ soundWanted=true; song.muted=false;
+ if(!song.paused){updateSoundButton();return;}
+ const promise=song.play();
+ if(promise&&typeof promise.catch==='function')promise.catch(err=>{
+  updateSoundButton();console.warn('تعذر تشغيل أغنية بلادي:',err);
+ });
+ updateSoundButton();
+}
+function beep(){} // National song replaces synthetic effects.
+soundButton.onclick=()=>{
+ if(!song.paused&&!song.muted){soundWanted=false;song.pause();}
+ else startSong();
+ updateSoundButton();
+};
+song.addEventListener('play',updateSoundButton);
+song.addEventListener('pause',updateSoundButton);
+song.addEventListener('error',()=>{updateSoundButton();console.warn('تعذر تحميل ملف biladi.m4a');});
+function closeGate(){document.querySelector('#gate').style.display='none';}
+$('#enter').onclick=()=>{
+ startSong();const g=$('#gate');g.classList.add('go');
+ setTimeout(()=>{g.classList.add('open');$('#glow').classList.add('on');$('#welcome').style.opacity=1;},50);
+ setTimeout(closeGate,3600);
+};
+$('#skip').onclick=()=>{startSong();closeGate();};
+// router
+const views=['home','mission','certificate','studio','submit','fort','gallery','heroes','leadership','kids','museum','wall','medal','about','admin'];
+function route(){let h=(location.hash||'#home').slice(1);if(!views.includes(h))h='home';
+ document.querySelectorAll('.view').forEach(v=>v.classList.toggle('on',v.id==='v-'+h));
+ document.querySelectorAll('nav a').forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+h));
+ if(h==='fort')setTimeout(()=>{resize();syncBricks()},50);scrollTo(0,0)}
+addEventListener('hashchange',route);
+// Admin queue shows pending submissions by default. Historical submissions remain accessible.
+let ADMIN_HISTORY=false;
+$('#showPending').onclick=()=>{ADMIN_HISTORY=false;render()};
+$('#showHistory').onclick=()=>{ADMIN_HISTORY=true;render()};
+// render
+function render(){$('#login').style.display=ADMIN?'none':'block';$('#panel').style.display=ADMIN?'block':'none';$('#pst').style.display=ADMIN?'':'none';$('#cfg').style.display=CONFIGURED?'none':'block';const a=ap().length,p=DB.filter(d=>d.s==='pending').length,pc=Math.min(100,Math.round(a/GOAL*100))+'%';
+ document.querySelectorAll('[data-c=approved]').forEach(e=>e.textContent=a);
+ document.querySelectorAll('[data-c=pending]').forEach(e=>e.textContent=p);
+ $('#pct').textContent=pc;$('#pct2').textContent=pc;$('#goalTxt').textContent=GOAL+' لبنة';
+ const q=$('#q').value.trim();
+ $('#gl').innerHTML=ap().filter(d=>d.h.includes(q)).map(d=>`<div class="msg"><b>${esc(d.h)}</b><span class="tag">${esc(d.t)}</span><br>${esc(d.x)}<br>${media(d)}<br><small>— ${esc(d.n)} (${esc(d.c)}${d.r?'، '+esc(d.r):''})</small></div>`).join('')||'<p style="opacity:.8">لا توجد مشاركات معتمدة بعد.</p>';
+ $('#adminQueueTitle').textContent=ADMIN_HISTORY?'سجل المشاركات المعتمدة والمرفوضة ('+DB.filter(d=>d.s!=='pending').length+')':'مشاركات بانتظار المراجعة ('+p+')';
+ $('#showPending').className=ADMIN_HISTORY?'btn alt':'btn';$('#showHistory').className=ADMIN_HISTORY?'btn':'btn alt';
+ $('#al').innerHTML=DB.filter(d=>ADMIN_HISTORY?d.s!=='pending':d.s==='pending').map(d=>`<div class="msg"><b>${esc(d.h)}</b> <span class="tag">${d.s==='approved'?'معتمدة':d.s==='rejected'?'مرفوضة':'قيد الانتظار'}</span><br>${esc(d.x)}<br>${media(d)}<br><small>${esc(d.n)} · ${esc(d.c)}${d.r?' · '+esc(d.r):''}</small><br>
+ ${d.s==='pending'?`<button type="button" class="btn" data-action="approved" data-id="${esc(d.id)}">قبول</button><button type="button" class="btn alt" data-action="rejected" data-id="${esc(d.id)}">رفض</button>`:`<button type="button" class="btn alt" data-action="pending" data-id="${esc(d.id)}">إعادة إلى الانتظار</button>`}<button type="button" class="btn alt" data-action="delete" data-id="${esc(d.id)}">حذف</button></div>`).join('')||(ADMIN_HISTORY?'<p>لا توجد مشاركات سابقة.</p>':'<p>لا توجد مشاركات تنتظر المراجعة.</p>');
+ syncBricks();hydrate();refreshExperiences()}
+// Admin actions use delegated clicks, avoiding fragile inline onclick handlers.
+$('#al').addEventListener('click',async e=>{
+ const btn=e.target.closest('button[data-action][data-id]');if(!btn||btn.disabled)return;
+ const {action,id}=btn.dataset;btn.disabled=true;const label=btn.textContent;btn.textContent='جارٍ التنفيذ…';
+ try{if(action==='delete')await del(id);else await setS(id,action)}
+ catch(err){toast('حدث خطأ: '+(err.message||String(err)))}
+ finally{btn.disabled=false;btn.textContent=label}
+});
+async function requireAdmin(){
+ if(!sb)throw new Error('تعذر الاتصال بقاعدة البيانات');
+ const {data:{session},error}=await sb.auth.getSession();
+ if(error||!session)throw new Error('انتهت جلسة الدخول، سجلي الدخول من جديد');
+ const r=await sb.rpc('is_admin');
+ if(r.error)throw new Error('تعذر التحقق من صلاحية الإدارة: '+r.error.message);
+ if(r.data!==true)throw new Error('الحساب الحالي ليس مخولًا لإدارة المشاركات');
+}
+async function setS(id,status){
+ await requireAdmin();
+ let reason=null;
+ if(status==='rejected'){reason=prompt('سبب الرفض (اختياري)');if(reason===null)return}
+ const up={status};if(status==='rejected')up.reject_reason=reason||null;
+ const {data,error}=await sb.from('submissions').update(up).eq('id',id).select('id,status');
+ if(error)throw new Error('فشل تعديل المشاركة: '+error.message);
+ if(!data||data.length!==1||data[0].status!==status)throw new Error('لم تُعدّل المشاركة. يُحتمل أن سياسات RLS تمنع التعديل. نحتاج مراجعة صلاحيات Supabase.');
+ await load();toast(status==='approved'?'تم اعتماد المشاركة وإضافتها إلى الحصن':status==='rejected'?'تم رفض المشاركة':'أُعيدت المشاركة إلى الانتظار');
+}
+function askDeleteConfirmation(){
+ return new Promise(resolve=>{
+  const shade=document.createElement('div');
+  shade.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.78);z-index:2147483647;display:flex;align-items:center;justify-content:center;padding:20px;direction:rtl';
+  shade.innerHTML='<div role="dialog" aria-modal="true" aria-label="تأكيد الحذف" style="background:#123d2e;color:#fff;border:2px solid #d8b45c;border-radius:18px;padding:24px;max-width:440px;width:100%;box-sizing:border-box;text-align:center;box-shadow:0 15px 50px #0009"><p style="font-size:21px;line-height:1.7">هل تريدين حذف هذه المشاركة نهائيًا؟ لا يمكن التراجع عن الحذف.</p><div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap"><button type="button" data-confirm="yes" style="background:#e3c36b;color:#1a2b1e;border:0;border-radius:12px;padding:13px 24px;font-weight:bold;font-size:18px">نعم، حذف</button><button type="button" data-confirm="no" style="background:#244b3b;color:white;border:1px solid #b99b51;border-radius:12px;padding:13px 24px;font-size:18px">إلغاء</button></div></div>';
+  const done=v=>{shade.remove();resolve(v)};
+  shade.querySelector('[data-confirm="yes"]').addEventListener('click',()=>done(true));
+  shade.querySelector('[data-confirm="no"]').addEventListener('click',()=>done(false));
+  document.body.appendChild(shade);
+ });
+}
+async function del(id){
+ if(!(await askDeleteConfirmation()))return;
+ await requireAdmin();const d=DB.find(x=>x.id===id);
+ const {data,error}=await sb.from('submissions').delete().eq('id',id).select('id');
+ if(error)throw new Error('فشل حذف المشاركة: '+error.message);
+ if(!data||data.length!==1)throw new Error('لم تُحذف المشاركة. يُحتمل أن سياسات RLS تمنع الحذف.');
+ let mediaWarning='';
+ if(d?.mp){const r=await sb.storage.from('media').remove([d.mp]);if(r.error)mediaWarning='، لكن تعذر حذف المرفق: '+r.error.message}
+ await load();toast('تم حذف المشاركة بنجاح'+mediaWarning);
+}
+$('#q').oninput=render;
+let lastCertificate=null;
+/* Certificate: visible preview + PNG download, compatible with iPhone Safari. */
+let certificateImageUrl=null;
+function fitCertificateText(ctx,text,maxWidth,initial,min){
+ let size=initial;
+ while(size>min){ctx.font=`800 ${size}px Tajawal, Tahoma, sans-serif`;if(ctx.measureText(text).width<=maxWidth)break;size-=2;}
+ return size;
+}
+async function buildCertificate(){
+ if(!lastCertificate)throw new Error('أرسلي مشاركتك أولًا للحصول على الشهادة.');
+ if(document.fonts?.ready)await document.fonts.ready;
+ const source=new Image();source.src='certificate-approved.png?v=school-logo-clean-20261029';
+ if(!source.complete)await new Promise((resolve,reject)=>{source.onload=resolve;source.onerror=()=>reject(new Error('تعذر تحميل تصميم الشهادة. تأكدي من رفع ملف certificate-approved.png مع الموقع.'));});
+ const canvas=document.createElement('canvas');canvas.width=3072;canvas.height=2048;
+ const ctx=canvas.getContext('2d');ctx.drawImage(source,0,0,canvas.width,canvas.height);
+ // School emblem is integrated directly into the certificate image without a white background.
+ ctx.direction='rtl';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillStyle='#073e2c';
+ const name=lastCertificate.name.trim(),title=lastCertificate.title.trim();
+ fitCertificateText(ctx,name,1120,88,36);ctx.fillText(name,1640,1205);
+ if(title){fitCertificateText(ctx,title,1040,49,28);ctx.fillText(title,1640,1464);}
+ return canvas.toDataURL('image/png');
+}
+async function showCertificate(){
+ if(!lastCertificate)return toast('أرسلي مشاركتك أولًا للحصول على الشهادة.');
+ const btn=$('#getCert');btn.disabled=true;
+ try{
+  certificateImageUrl=await buildCertificate();
+  let panel=$('#certificatePreview');
+  if(!panel){panel=document.createElement('div');panel.id='certificatePreview';panel.className='certificate-preview';document.body.appendChild(panel);}
+  panel.innerHTML='<div class="certificate-dialog" role="dialog" aria-modal="true" aria-label="معاينة شهادة المشاركة"><div class="certificate-toolbar"><strong>شهادة مشاركتك في حصن الوطن</strong><button type="button" id="closeCertificate" class="btn alt">إغلاق ✕</button></div><img id="certificateResult" alt="شهادة المشاركة باسمك"/><div class="certificate-actions"><a id="saveCertificate" class="btn" download="شهادة-مشاركة-حصن-الوطن.png">تحميل الشهادة كصورة</a><button type="button" id="printCertButton" class="btn alt">طباعة / حفظ PDF</button></div><p class="certificate-hint">على الآيفون: إذا لم يبدأ التحميل، اضغطي مطولًا على صورة الشهادة واختاري «حفظ في الصور».</p></div>';
+  panel.querySelector('#certificateResult').src=certificateImageUrl;
+  panel.querySelector('#saveCertificate').href=certificateImageUrl;
+  panel.querySelector('#closeCertificate').onclick=()=>{panel.classList.remove('on');document.body.style.overflow='';};
+  panel.querySelector('#printCertButton').onclick=()=>{
+   const w=window.open('','_blank');if(!w){toast('اسمحي بفتح النوافذ المنبثقة، أو احفظي الصورة أولًا ثم اطبعيها.');return;}
+   w.document.write('<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><title>شهادة مشاركة</title><style>@page{size:A4 landscape;margin:0}body{margin:0;background:white}img{width:100%;height:auto;display:block}@media print{img{width:297mm;height:198mm}}
+/* Targeted mobile fixes — fortress emblem, painting swatch, heroes actions */
+.fortress-brand-emblem{width:104px;height:104px;margin:0 auto 10px;border-radius:22px;overflow:hidden;border:2px solid #f5d77c;box-shadow:0 0 26px #f4c35a88,0 10px 25px #0008;background:#123b2a}
+.fortress-brand-emblem img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
+.brand-mini-fort{display:inline-block;vertical-align:middle;width:27px;height:27px;margin-inline-end:5px;border-radius:7px;background:url('castle-hero.jpg') center/cover;border:1px solid #e7c270;box-shadow:0 0 9px #f6dd8e55}
+.heroes-actions{display:flex;flex-direction:column;align-items:center;gap:14px;margin:24px auto 5px;max-width:470px}
+.heroes-actions .btn{display:block;width:100%;margin:0;text-decoration:none;text-align:center;white-space:normal;line-height:1.6;overflow-wrap:anywhere}
+.paint-color-label{display:flex!important;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center}
+.paint-color-preview{display:inline-block;width:37px;height:37px;border:3px solid #ffe2a0;border-radius:50%;background:#0b5c3b;box-shadow:0 3px 12px #0006;flex:none}
+#paintColor{appearance:auto;-webkit-appearance:auto;display:inline-block!important;width:52px!important;height:44px!important;min-width:52px!important;padding:3px!important;background:transparent!important;border:1px solid #e7bd67!important;border-radius:12px!important;cursor:pointer;flex:none}
+#paintColor::-webkit-color-swatch-wrapper{padding:2px}
+#paintColor::-webkit-color-swatch{border:2px solid #ffe2a0;border-radius:8px}
+@media(max-width:600px){.heroes-actions{width:100%}.heroes-actions .btn{font-size:clamp(15px,4vw,19px);padding:13px 12px}.fortress-brand-emblem{width:88px;height:88px}}
+</style></head><body><img id="c" alt="شهادة المشاركة"></body></html>');w.document.close();w.document.getElementById('c').src=certificateImageUrl;
+   w.document.getElementById('c').onload=()=>{w.focus();w.print();};
+  };
+  panel.classList.add('on');document.body.style.overflow='hidden';
+ }catch(e){toast(e.message||'تعذر إنشاء الشهادة.');}finally{btn.disabled=false;}
+}
+$('#getCert').onclick=showCertificate;
+
+$('#send').onclick=async()=>{const f=$('#f');if(!f.checkValidity()){f.reportValidity();return}
+ if(!sb)return toast('تعذر الاتصال بخدمة استقبال المشاركات. تأكدي من اتصال الإنترنت وأعيدي فتح الموقع، ولا تعتبري المشاركة مرسلة.');if($('#hp').value)return;
+ $('#certificateReady').style.display='none';const b=$('#send');b.disabled=true;let mp=null,mt=null;const file=$('#ff').files[0];
+ try{const uid=await ensureUser();if(file){const k=file.type.split('/')[0],lim={image:10,video:50,audio:15}[k];if(!lim||file.size>lim*1048576)throw new Error('نوع الملف غير مدعوم أو حجمه كبير');
+  mp='pending/'+uid+'/'+crypto.randomUUID()+'.'+((file.name.split('.').pop()||'bin').replace(/[^a-z0-9]/gi,'').toLowerCase().slice(0,5)||'bin');mt=k;
+  const u=await sb.storage.from('media').upload(mp,file,{contentType:file.type});if(u.error)throw u.error}
+  const r=await sb.from('submissions').insert({name:$('#fn').value,category:$('#fc').value,region:$('#fr').value||null,type:$('#ft').value,title:$('#fh').value,body:$('#fx').value,media_path:mp,media_type:mt});
+  if(r.error)throw r.error;lastCertificate={name:$('#fn').value.trim(),title:$('#fh').value.trim()};f.reset();beep(740,.5);$('#certificateReady').style.display='block';
+  const j=$('#journey');j.style.display='flex';j.innerHTML=['تم استلام بصمتك','بانتظار المراجعة','اعتمدت بصمتك','أضيئت لبنتك في الحصن'].map((t,i)=>`<span class="${i<2?'d':''}">${t}</span>`).join('')
+ }catch(e){toast(/RATE_LIMIT|row-level security/.test(e.message||'')?'وصلتَ للحد المسموح من المشاركات أو الرفع حاليًا، حاول لاحقًا.':'تعذر الإرسال: '+(e.message||e))}b.disabled=false};
+$('#rand').onclick=()=>{const a=ap(),o=$('#randOut');o.style.display='block';o.innerHTML=a.length?(m=>`<b>${esc(m.h)}</b><br>${esc(m.x)}<br>${media(m)}<small>— ${esc(m.n)}</small>`)(a[Math.floor(Math.random()*a.length)]):'لا توجد رسائل معتمدة بعد. كن أول من يضيء لبنة!';hydrate()};
+// 3D
+let R,S,C,bricks=[],drag=0,rot=0,ry=.6,flag,pts;
+const cv=$('#stage');
+try{if(!window.THREE)throw new Error('Three.js unavailable');R=new THREE.WebGLRenderer({canvas:cv,antialias:true});}catch(e){R=null;cv.outerHTML='<div class="card">المتصفح لا يدعم العرض ثلاثي الأبعاد.</div>'}
+if(R){S=new THREE.Scene();C=new THREE.PerspectiveCamera(50,1,.1,200);C.position.set(0,11,22);C.lookAt(0,4,0);
+ S.add(new THREE.AmbientLight(0xffffff,.55));const dl=new THREE.DirectionalLight(0xfff0c0,.9);dl.position.set(8,14,10);S.add(dl);
+ const sandstone=new THREE.MeshStandardMaterial({color:0xc6a66c,roughness:.86}),stoneLight=new THREE.MeshStandardMaterial({color:0xe7d0a0,roughness:.9}),gold=new THREE.MeshStandardMaterial({color:0xe2b34f,metalness:.65,roughness:.27}),deepGreen=new THREE.MeshStandardMaterial({color:0x074d36,metalness:.15,roughness:.6}),wood=new THREE.MeshStandardMaterial({color:0x49301c,roughness:.8});
+ const grp=new THREE.Group();S.add(grp);grp.name='fort';
+ const add=(g,m,x,y,z)=>{const o=new THREE.Mesh(g,m);o.position.set(x,y,z);grp.add(o);return o};
+ // Najdi-inspired fortified courtyard: textured layers, parapets, arched entrance, watch towers.
+ add(new THREE.CylinderGeometry(12.8,13.4,.8,64),deepGreen,0,-.45,0);
+ add(new THREE.BoxGeometry(13,.35,13),stoneLight,0,.04,0);
+ const wall=(x,z,w,d)=>{add(new THREE.BoxGeometry(w,3.5,d),sandstone,x,1.9,z);add(new THREE.BoxGeometry(w+.3,.28,d+.3),gold,x,3.75,z)};
+ wall(0,-6,13,.9);wall(-6,0,.9,13);wall(6,0,.9,13);wall(-4.35,6,4.3,.9);wall(4.35,6,4.3,.9);
+ // Repeated crenellations, corner detailing, narrow arrow slits.
+ for(let i=-6;i<=6;i+=1.15){for(const z of [-6,6]){if(z===6&&Math.abs(i)<2.25)continue;add(new THREE.BoxGeometry(.64,.72,.95),stoneLight,i,4.2,z)}for(const x of [-6,6])add(new THREE.BoxGeometry(.95,.72,.64),stoneLight,x,4.2,i)}
+ const turret=(x,z)=>{add(new THREE.CylinderGeometry(1.48,1.68,7.8,12),sandstone,x,3.95,z);add(new THREE.CylinderGeometry(1.75,1.75,.38,12),gold,x,8,z);add(new THREE.CylinderGeometry(1.32,1.42,1.2,12),stoneLight,x,8.75,z);add(new THREE.CylinderGeometry(1.8,1.8,.22,12),gold,x,9.4,z);for(let j=0;j<12;j++){const a=j*Math.PI/6;add(new THREE.BoxGeometry(.47,.7,.55),stoneLight,x+1.43*Math.sin(a),9.8,z+1.43*Math.cos(a)).rotation.y=a}for(let j=0;j<4;j++){const a=j*Math.PI/2;add(new THREE.BoxGeometry(.3,1.15,.09),wood,x+1.54*Math.sin(a),5.9,z+1.54*Math.cos(a)).rotation.y=a}};
+ [[-6,-6],[6,-6],[-6,6],[6,6]].forEach(([x,z])=>turret(x,z));
+ // Grand gateway and inset rounded arch, with an ornamental gilded crown.
+ add(new THREE.BoxGeometry(4.4,5.4,1.25),sandstone,0,2.8,6.15);
+ add(new THREE.BoxGeometry(2.7,3.5,.14),wood,0,1.78,6.84);
+ add(new THREE.TorusGeometry(1.36,.17,10,32,Math.PI),gold,0,3.52,6.92).rotation.z=0;
+ add(new THREE.BoxGeometry(3.35,.25,.32),gold,0,5.55,6.8);
+ for(let i=-1;i<=1;i++)add(new THREE.BoxGeometry(.34,.52,.38),gold,i*1.05,5.95,6.8);
+ // Inner citadel, arched niches and gold roofline.
+ add(new THREE.BoxGeometry(5.3,5.7,5),sandstone,0,3,-.2);add(new THREE.BoxGeometry(5.8,.35,5.5),gold,0,6,-.2);
+ for(let x of [-1.55,0,1.55])for(let y of [2.1,4.15]){add(new THREE.BoxGeometry(.7,1.2,.09),wood,x,y,2.36);add(new THREE.TorusGeometry(.35,.09,8,16,Math.PI),gold,x,y+.6,2.4)}
+ for(let i=-2.2;i<=2.2;i+=.9)for(let z of [-2.3,1.9])add(new THREE.BoxGeometry(.48,.6,.5),stoneLight,i,6.47,z);
+ add(new THREE.CylinderGeometry(.07,.07,3,10),gold,0,8.1,-.2);
+ const fg=new THREE.PlaneGeometry(2.6,1.5,18,3);flag=add(fg,new THREE.MeshStandardMaterial({color:0x087a4a,side:THREE.DoubleSide,roughness:.7}),1.3,9,-.2);
+ S.add(new THREE.HemisphereLight(0xffedc3,0x123c2e,1.0));const glow=new THREE.PointLight(0xffc75a,1.8,28);glow.position.set(1,8,10);S.add(glow);
+ const pg=new THREE.BufferGeometry(),pa=[];for(let i=0;i<300;i++)pa.push((Math.random()-.5)*34,Math.random()*16,(Math.random()-.5)*34);
+ pg.setAttribute('position',new THREE.Float32BufferAttribute(pa,3));pts=new THREE.Points(pg,new THREE.PointsMaterial({color:0xf6dd8e,size:.12,transparent:true,opacity:.8}));S.add(pts);
+ let lx=0;const dn=e=>{drag=1;lx=e.clientX},mv=e=>{if(drag){ry+=(e.clientX-lx)*.01;lx=e.clientX}},up=e=>{drag=0};
+ cv.addEventListener('pointerdown',dn);addEventListener('pointermove',mv);addEventListener('pointerup',up);
+ const rc=new THREE.Raycaster(),mp=new THREE.Vector2();let sx,sy;
+ cv.addEventListener('pointerdown',e=>{sx=e.clientX;sy=e.clientY});
+ cv.addEventListener('pointerup',e=>{if(Math.abs(e.clientX-sx)+Math.abs(e.clientY-sy)>6)return;const r=cv.getBoundingClientRect();mp.set((e.clientX-r.left)/r.width*2-1,-((e.clientY-r.top)/r.height)*2+1);rc.setFromCamera(mp,C);
+  const h=rc.intersectObjects(bricks)[0];if(h){const d=DB.find(x=>x.id===h.object.userData.id);if(d){$('#mb').innerHTML=`<h2>${esc(d.h)}</h2><p>${esc(d.x)}</p>${media(d)}<small>— ${esc(d.n)}</small>`;modal.classList.add('on');hydrate();beep(990,.3)}}});
+ var gfort=grp;
+ (function loop(t){requestAnimationFrame(loop);if(!$('#v-fort').classList.contains('on'))return;
+  if(!drag&&!matchMedia('(prefers-reduced-motion:reduce)').matches)ry+=.003;gfort.rotation.y=ry;
+  const p=flag.geometry.attributes.position;for(let i=0;i<p.count;i++){const x=p.getX(i);p.setZ(i,Math.sin(x*2+t/300)*.12*(x+1.3)/2.6)}p.needsUpdate=true;
+  bricks.forEach(b=>{if(b.scale.x<1)b.scale.setScalar(Math.min(1,b.scale.x+.04))});
+  pts.rotation.y=t/20000;R.render(S,C)})(0)}
+function resize(){if(!R)return;const w=cv.clientWidth,h=cv.clientHeight;R.setSize(w,h,false);R.setPixelRatio(Math.min(devicePixelRatio,2));C.aspect=w/h;C.updateProjectionMatrix()}
+addEventListener('resize',resize);
+function syncBricks(){if(!R)return;const a=ap();bricks.forEach(b=>{if(!a.find(d=>d.id===b.userData.id)){gfort.remove(b);b.userData.dead=1}});bricks=bricks.filter(b=>!b.userData.dead);
+ a.forEach(d=>{if(bricks.find(b=>b.userData.id===d.id))return;const i=bricks.length,per=24,lv=Math.floor(i/per),k=i%per,ang=k/per*Math.PI*2,rad=3.4+(lv%3)*.1;
+  const m=new THREE.Mesh(new THREE.BoxGeometry(.9,.5,.5),new THREE.MeshStandardMaterial({color:0xf2c14e,emissive:0xd9ad45,emissiveIntensity:.8,metalness:.7,roughness:.3}));
+  m.position.set(Math.cos(ang)*rad,.4+lv*.55,Math.sin(ang)*rad+0);m.rotation.y=-ang+Math.PI/2;m.scale.setScalar(.01);m.userData.id=d.id;gfort.add(m);bricks.push(m)})}
+async function chk(se){ADMIN=false;if(se){const r=await sb.rpc('is_admin');if(r.error)toast('تعذر التحقق من صلاحيات الإدارة: '+r.error.message);else ADMIN=r.data===true}await load()}
+$('#lg').onclick=async()=>{if(!sb)return toast('تعذر الاتصال بخدمة استقبال المشاركات. تأكدي من اتصال الإنترنت وأعيدي فتح الموقع، ولا تعتبري المشاركة مرسلة.');const {data,error}=await sb.auth.signInWithPassword({email:$('#le').value,password:$('#lp').value});
+ if(error)return toast('بيانات الدخول غير صحيحة');await chk(data.session);if(!ADMIN){await sb.auth.signOut();toast('هذا الحساب ليس مشرفًا');load()}};
+$('#lc').onclick=async()=>{const {data,error}=await sb.rpc('orphan_media');if(error)return toast(error.message);if(!data.length)return toast('لا توجد ملفات يتيمة.');const r=await sb.storage.from('media').remove(data);toast(r.error?r.error.message:'حُذف '+data.length+' ملف يتيم.')};
+$('#lo').onclick=async()=>{await sb.auth.signOut();ADMIN=false;load()};
+
+
+let museumFilter='all',wallOffset=0,wallPlaying=true,wallTimer=null,kidAudioFile=null,kidRecorder=null,kidStream=null,kidChunks=[],kidRecordTimeout=null;
+function refreshExperiences(){
+ const approved=ap(), museum=document.getElementById('museumItems'),wall=document.getElementById('wallItems');
+ if(museum){
+  const matches=approved.filter(d=>museumFilter==='all'||(museumFilter==='text'?!d.mp:d.mt===museumFilter));
+  museum.innerHTML=matches.map((d,i)=>'<button type="button" class="museum-art" data-museum-index="'+i+'"><span class="museum-frame"><span class="museum-icon">'+(d.mt==='image'?'🎨':d.mt==='video'?'🎬':d.mt==='audio'?'🎧':'✉️')+'</span><strong>'+esc(d.h)+'</strong><small>'+esc(d.n)+'</small></span></button>').join('')||'<p class="museum-empty">بانتظار أولى الإبداعات المعتمدة لتضيء قاعات المتحف.</p>';
+  museum._entries=matches;
+ }
+ if(wall){
+  const entries=approved.filter(d=>d.x);
+  if(entries.length&&wallOffset>=entries.length)wallOffset=0;
+  const d=entries[wallOffset];
+  wall.innerHTML=d?'<article class="wall-note wall-spotlight"><div class="wall-quote">❝</div><h3>'+esc(d.h)+'</h3><p>'+esc(d.x)+'</p><small>رسالة وفاء من '+esc(d.n)+'</small></article>':'<p class="museum-empty">بانتظار أولى رسائل الوفاء المعتمدة.</p>';
+ }
+ hydrate();
+}
+document.querySelectorAll('#kidChoices button').forEach(b=>b.addEventListener('click',()=>{
+ document.querySelectorAll('#kidChoices button').forEach(x=>x.classList.remove('chosen'));
+ b.classList.add('chosen');document.getElementById('kidText').value=b.dataset.kid;
+}));
+const recordStatus=document.getElementById('kidRecordStatus'),playback=document.getElementById('kidPlayback');
+document.getElementById('kidRecord').addEventListener('click',async()=>{
+ try{
+  if(!navigator.mediaDevices?.getUserMedia||!window.MediaRecorder)throw Error('المتصفح لا يدعم التسجيل الصوتي. يمكنك رفع ملف صوتي من نموذج المشاركة.');
+  kidStream=await navigator.mediaDevices.getUserMedia({audio:true});
+  const preferred=['audio/mp4','audio/webm;codecs=opus','audio/webm'].find(t=>MediaRecorder.isTypeSupported(t));
+  kidRecorder=new MediaRecorder(kidStream,preferred?{mimeType:preferred}:undefined);kidChunks=[];
+  kidRecorder.ondataavailable=e=>{if(e.data.size)kidChunks.push(e.data)};
+  kidRecorder.onstop=()=>{
+   const blob=new Blob(kidChunks,{type:kidRecorder.mimeType||'audio/mp4'});
+   if(blob.size>15*1048576){recordStatus.textContent='التسجيل كبير جدًا. جرّب تسجيلًا أقصر.';return}
+   const ext=blob.type.includes('webm')?'webm':'m4a';
+   kidAudioFile=new File([blob],'رسالة-إلى-حامي-الوطن.'+ext,{type:blob.type||'audio/mp4'});
+   playback.src=URL.createObjectURL(blob);playback.style.display='block';
+   document.getElementById('kidClearAudio').style.display='inline-block';
+   recordStatus.textContent='اكتمل التسجيل. استمع إليه ثم أرسل رسالتك.';
+  };
+  kidRecorder.start();document.getElementById('kidRecord').disabled=true;
+  document.getElementById('kidStop').disabled=false;recordStatus.textContent='🔴 جارٍ التسجيل…';
+  kidRecordTimeout=setTimeout(()=>{if(kidRecorder?.state==='recording')document.getElementById('kidStop').click()},60000);
+ }catch(e){recordStatus.textContent=e.message||'تعذر استخدام الميكروفون. تحقّق من السماح له في Safari.'}
+});
+document.getElementById('kidStop').addEventListener('click',()=>{
+ if(kidRecorder?.state==='recording')kidRecorder.stop();
+ kidStream?.getTracks().forEach(t=>t.stop());clearTimeout(kidRecordTimeout);
+ document.getElementById('kidRecord').disabled=false;document.getElementById('kidStop').disabled=true;
+});
+document.getElementById('kidClearAudio').addEventListener('click',()=>{
+ kidAudioFile=null;playback.removeAttribute('src');playback.style.display='none';
+ document.getElementById('kidClearAudio').style.display='none';recordStatus.textContent='تم حذف التسجيل.';
+});
+document.getElementById('kidContinue').addEventListener('click',()=>{
+ const n=document.getElementById('kidName').value.trim(),t=document.getElementById('kidText').value.trim();
+ if(!n||!t){toast('أدخلي اسم المشارك واختاري أو اكتبي رسالة الشكر أولًا.');return}
+ if(kidRecorder?.state==='recording'){toast('أوقفي التسجيل أولًا.');return}
+ document.getElementById('fn').value=n;document.getElementById('ft').value='رسالة إلى جنودنا';
+ document.getElementById('fh').value='رسالة من قلب طفل إلى حامي الوطن';
+ document.getElementById('fx').value=t;document.getElementById('fc').value='طالب';
+ if(kidAudioFile){try{const dt=new DataTransfer();dt.items.add(kidAudioFile);document.getElementById('ff').files=dt.files}
+ catch(e){toast('تعذر نقل التسجيل تلقائيًا. احفظيه وارفعِيه من نموذج المشاركة.');return}}
+ const env=document.getElementById('kidEnvelope');env.classList.add('fly');
+ setTimeout(()=>{env.classList.remove('fly');location.hash='#submit';toast('الرسالة جاهزة! وافقي على الشروط واضغطي «أرسل بصمتي».')},1200);
+});
+document.getElementById('museumFilters').addEventListener('click',e=>{
+ const b=e.target.closest('button[data-filter]');if(!b)return;
+ museumFilter=b.dataset.filter;
+ document.querySelectorAll('#museumFilters button').forEach(x=>x.classList.toggle('active',x===b));
+ refreshExperiences();
+});
+document.getElementById('museumItems').addEventListener('click',e=>{
+ const b=e.target.closest('[data-museum-index]');if(!b)return;
+ const d=document.getElementById('museumItems')._entries[Number(b.dataset.museumIndex)];
+ if(!d)return;
+ const detail=document.getElementById('museumDetail');
+ detail.innerHTML='<h2>'+esc(d.h)+'</h2><p>'+esc(d.x)+'</p>'+media(d)+'<p>— '+esc(d.n)+'</p>';
+ document.getElementById('museumLightbox').hidden=false;document.body.style.overflow='hidden';hydrate();
+});
+document.getElementById('museumClose').addEventListener('click',()=>{
+ document.getElementById('museumLightbox').hidden=true;document.body.style.overflow='';
+ document.querySelectorAll('#museumDetail video,#museumDetail audio').forEach(x=>x.pause());
+});
+function wallAdvance(){const count=ap().filter(d=>d.x).length;wallOffset=count?(wallOffset+1)%count:0;refreshExperiences()}
+document.getElementById('wallNext').addEventListener('click',wallAdvance);
+document.getElementById('wallPlay').addEventListener('click',()=>{
+ wallPlaying=!wallPlaying;document.getElementById('wallPlay').textContent=wallPlaying?'⏸ إيقاف العرض التلقائي':'▶ تشغيل العرض التلقائي';
+});
+wallTimer=setInterval(()=>{if(wallPlaying&&location.hash==='#wall')wallAdvance()},8000);
+document.getElementById('wallFullscreen').addEventListener('click',async()=>{
+ const el=document.getElementById('wallStage');
+ if(document.fullscreenElement){await document.exitFullscreen();return}
+ if(el.requestFullscreen){try{await el.requestFullscreen()}catch(e){toast('يمكنك استخدام وضع الشاشة الأفقية في Safari للعرض على السبورة.')}}
+ else toast('ملء الشاشة غير متاح في هذا المتصفح. استخدمي العرض الأفقي أو AirPlay.');
+});
+document.getElementById('makeMedal').addEventListener('click',async()=>{
+ const n=document.getElementById('medalName').value.trim();
+ if(!n){toast('اكتبي اسم المشارك أولًا.');return}
+ if(document.fonts?.ready)await document.fonts.ready;
+ const c=document.createElement('canvas');c.width=1800;c.height=1800;
+ const ctx=c.getContext('2d');
+ const bg=ctx.createRadialGradient(900,600,100,900,900,1200);
+ bg.addColorStop(0,'#176447');bg.addColorStop(1,'#021c15');ctx.fillStyle=bg;ctx.fillRect(0,0,1800,1800);
+ const edge=ctx.createLinearGradient(0,0,1800,1800);edge.addColorStop(0,'#fff1b7');edge.addColorStop(.3,'#bc7924');edge.addColorStop(.55,'#ffe69a');edge.addColorStop(1,'#995a15');
+ ctx.strokeStyle=edge;ctx.lineWidth=25;ctx.strokeRect(65,65,1670,1670);
+ ctx.textAlign='center';ctx.fillStyle='#ffe8aa';ctx.font='bold 96px Tajawal,Tahoma,Arial';ctx.fillText('حصن الوطن',900,245);
+ // Satin ribbon behind the relief medal.
+ ctx.fillStyle='#0b7652';ctx.beginPath();ctx.moveTo(640,430);ctx.lineTo(820,460);ctx.lineTo(680,1120);ctx.lineTo(470,1190);ctx.closePath();ctx.fill();
+ ctx.beginPath();ctx.moveTo(1160,430);ctx.lineTo(980,460);ctx.lineTo(1120,1120);ctx.lineTo(1330,1190);ctx.closePath();ctx.fill();
+ ctx.strokeStyle='#e9c16d';ctx.lineWidth=12;ctx.stroke();
+ const centerX=900,centerY=725;
+ for(let r=365;r>=300;r-=8){ctx.beginPath();ctx.arc(centerX,centerY,r,0,Math.PI*2);ctx.fillStyle=r%16?'#a7681d':'#f4d275';ctx.fill()}
+ const gold=ctx.createLinearGradient(500,380,1290,1050);
+ gold.addColorStop(0,'#fff5bd');gold.addColorStop(.28,'#dfad46');gold.addColorStop(.55,'#fff3a7');gold.addColorStop(.85,'#a76b23');gold.addColorStop(1,'#f8d77b');
+ ctx.beginPath();ctx.arc(centerX,centerY,310,0,Math.PI*2);ctx.fillStyle=gold;ctx.fill();
+ ctx.beginPath();ctx.arc(centerX,centerY,268,0,Math.PI*2);ctx.fillStyle='#07563d';ctx.fill();ctx.strokeStyle='#fff0aa';ctx.lineWidth=13;ctx.stroke();
+ ctx.fillStyle='#ffe8a2';ctx.font='180px Arial';ctx.fillText('🌴',900,735);
+ ctx.font='bold 72px Tajawal,Tahoma,Arial';ctx.fillText('حارس الوفاء',900,860);
+ ctx.font='bold 90px Tajawal,Tahoma,Arial';ctx.fillText('وسام الوفاء الوطني',900,1280);
+ let size=84;do{ctx.font='bold '+size+'px Tajawal,Tahoma,Arial';if(ctx.measureText(n).width<=1550)break;size-=3}while(size>28);
+ ctx.fillStyle='#fff9e6';ctx.fillText(n,900,1410);
+ ctx.font='48px Tajawal,Tahoma,Arial';ctx.fillStyle='#e9ce86';ctx.fillText('رسالة شكر لحماة الوطن',900,1515);
+ ctx.font='35px Tajawal,Tahoma,Arial';ctx.fillText('وسام تذكاري للمشاركة، وليس اعتمادًا للنشر',900,1610);
+ const result=document.getElementById('medalResult');result.replaceChildren();
+ const url=c.toDataURL('image/png'),img=document.createElement('img');img.src=url;img.alt='وسام الوفاء باسم المشارك';img.style='display:block;width:100%;max-width:480px;margin:18px auto;border-radius:16px';
+ const a=document.createElement('a');a.href=url;a.download='وسام-حارس-الوفاء.png';a.className='btn';a.textContent='تحميل الوسام عالي الدقة';
+ result.append(img,a);
+});
+
+// Self-contained educational mission. Does not write to Supabase or modify moderation.
+const missionSets={
+ kids:{title:'براعم الوفاء',q:[['من يحافظ على أمن وطننا؟',['حماة الوطن','الألعاب','الحقائب'],0],['كيف نشكر حماة الوطن؟',['نكتب رسالة جميلة','ننشر معلومات خاصة','نؤذي الآخرين'],0],['ما السلوك الذي يدل على حب الوطن؟',['المحافظة على الممتلكات العامة','إتلاف الحدائق','رمي النفايات'],0]]},
+ students:{title:'صنّاع الأثر',q:[['وصلتك معلومة مجهولة عن أمن الوطن. ماذا تفعل؟',['أنشرها بسرعة','أتحقق من مصدر رسمي ولا أنشر الشائعات','أرسلها لكل المجموعات'],1],['ما أفضل تعبير عن تقدير حماة الوطن؟',['رسالة احترام ومشاركة إيجابية','نشر معلومات عسكرية','السخرية من الآخرين'],0],['كيف تساهم في أمن مجتمعك الرقمي؟',['حماية المعلومات الشخصية والتحقق من الأخبار','مشاركة كلمات المرور','تداول الشائعات'],0]]},
+ adults:{title:'سفراء الوفاء',q:[['كيف تعزز قيمة الوفاء لحماة الوطن في المدرسة أو الأسرة؟',['بنشاط تعليمي ورسائل تقدير هادفة','بإعادة نشر الشائعات','بمشاركة معلومات حساسة'],0],['أي مشاركة تناسب مبادرة وطنية مسؤولة؟',['عمل موثق يحترم الخصوصية','نشر صور أطفال دون موافقة','نشر بيانات شخصية'],0],['ما أفضل طريقة لقياس أثر المبادرة؟',['متابعة المشاركة والتعلم والتفاعل الحقيقي','الاكتفاء بعدد الزخارف','استخدام أرقام غير حقيقية'],0]]}
+};
+let missionTrack=null,missionIndex=0;
+function missionReset(){document.getElementById('missionChoice').hidden=false;document.getElementById('missionGame').hidden=true;document.getElementById('missionDone').hidden=true}
+function missionShow(){const m=missionSets[missionTrack],q=m.q[missionIndex];document.getElementById('missionBar').style.width=(missionIndex/3*100)+'%';document.getElementById('missionStep').textContent=m.title+' — المحطة '+(missionIndex+1)+' من 3';document.getElementById('missionQuestion').textContent=q[0];document.getElementById('missionFeedback').textContent='';const answers=document.getElementById('missionAnswers');answers.replaceChildren();q[1].forEach((v,i)=>{const b=document.createElement('button');b.type='button';b.className='mission-answer';b.textContent=v;b.onclick=()=>{if(i!==q[2]){document.getElementById('missionFeedback').textContent='حاولي مرة أخرى، وفكّري في السلوك الأكثر مسؤولية.';return}missionIndex++;if(missionIndex===3){document.getElementById('missionGame').hidden=true;document.getElementById('missionDone').hidden=false;document.getElementById('missionResult').textContent='أكملت المحطات الثلاث في مسار '+m.title+'. يمكنك الآن تقديم رسالة امتنان إلى حماة الوطن.'}else missionShow()};answers.appendChild(b)})}
+document.querySelectorAll('[data-track]').forEach(b=>b.addEventListener('click',()=>{missionTrack=b.dataset.track;missionIndex=0;document.getElementById('missionChoice').hidden=true;document.getElementById('missionDone').hidden=true;document.getElementById('missionGame').hidden=false;missionShow()}));
+document.getElementById('missionBack').onclick=missionReset;
+document.getElementById('missionAgain').onclick=missionReset;
+
+route();render();
+if(sb){sb.auth.getSession().then(({data})=>chk(data.session));sb.channel('subs').on('postgres_changes',{event:'*',schema:'public',table:'submissions'},()=>load()).subscribe()}
+
+// Dedicated certificate section: not the submission form.
+document.getElementById('certificatePageDownload').addEventListener('click',()=>{
+ if(!lastCertificate){location.hash='#submit';toast('أرسلي بصمتك أولًا لاستخراج شهادة باسمك.');return}
+ showCertificate();
+});
+// Touch drawing studio. The canvas stays entirely local until the visitor submits.
+(function(){
+ const c=document.getElementById('paintCanvas'),ctx=c.getContext('2d'),color=document.getElementById('paintColor'),size=document.getElementById('paintSize');
+ const colorPreview=document.getElementById('paintColorPreview');
+ function syncPaintColor(){colorPreview.style.backgroundColor=color.value;colorPreview.setAttribute('title',color.value)}
+ color.addEventListener('input',syncPaintColor);color.addEventListener('change',syncPaintColor);syncPaintColor();
+ const history=[];let drawing=false,last=null;
+ function blank(){ctx.fillStyle='#fff';ctx.fillRect(0,0,c.width,c.height)}blank();
+ function snapshot(){if(history.length>=15)history.shift();history.push(ctx.getImageData(0,0,c.width,c.height))}
+ function point(e){const r=c.getBoundingClientRect();return {x:(e.clientX-r.left)*c.width/r.width,y:(e.clientY-r.top)*c.height/r.height}}
+ c.addEventListener('pointerdown',e=>{e.preventDefault();snapshot();drawing=true;last=point(e);c.setPointerCapture(e.pointerId);ctx.beginPath();ctx.arc(last.x,last.y,Number(size.value)/2,0,Math.PI*2);ctx.fillStyle=color.value;ctx.fill()});
+ c.addEventListener('pointermove',e=>{if(!drawing)return;e.preventDefault();const p=point(e);ctx.beginPath();ctx.moveTo(last.x,last.y);ctx.lineTo(p.x,p.y);ctx.strokeStyle=color.value;ctx.lineWidth=Number(size.value);ctx.lineCap='round';ctx.lineJoin='round';ctx.stroke();last=p});
+ ['pointerup','pointercancel','lostpointercapture'].forEach(t=>c.addEventListener(t,()=>{drawing=false;last=null}));
+ document.getElementById('paintUndo').onclick=()=>{const prev=history.pop();if(prev)ctx.putImageData(prev,0,0)};
+ document.getElementById('paintClear').onclick=()=>{if(!confirm('مسح اللوحة بالكامل؟'))return;snapshot();blank()};
+ document.getElementById('paintSave').onclick=()=>{const a=document.createElement('a');a.download='لوحتي-لحماة-الوطن.png';a.href=c.toDataURL('image/png');a.click()};
+ document.getElementById('paintSubmit').onclick=()=>{
+  const name=document.getElementById('artistName').value.trim();if(!name){toast('أدخلي اسم المشاركة أولًا.');return}
+  c.toBlob(blob=>{if(!blob){toast('تعذر تجهيز اللوحة.');return}
+   try{const file=new File([blob],'لوحة-حماة-الوطن.png',{type:'image/png'});const dt=new DataTransfer();dt.items.add(file);document.getElementById('ff').files=dt.files;
+    document.getElementById('fn').value=name;document.getElementById('ft').value='رسم فني';document.getElementById('fh').value='لوحة امتنان لحماة الوطن';document.getElementById('fx').value='لوحة فنية تعبيرية من مرسم حماة الوطن.';
+    location.hash='#submit';toast('أُرفقت اللوحة! اختاري الفئة، وافقي على الشروط ثم اضغطي «أرسل بصمتي».');
+   }catch(e){toast('تعذر إرفاق اللوحة تلقائيًا. احفظي الصورة ثم ارفعيها من نموذج المشاركة.')}
+  },'image/png');
+ };
+})();
+</script>
+<script src="cinema.js?v=5"></script>
+<script src="cinema2.js?v=5"></script>
+</body>
+</html>
