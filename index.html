@@ -333,12 +333,25 @@ main{padding:12px 10px 60px}
 .drawing-tools label{display:flex;align-items:center;gap:7px}
 #paintCanvas{display:block;width:100%;height:auto;aspect-ratio:10/7;background:#fff;border:4px solid #d9ad45;border-radius:15px;touch-action:none;cursor:crosshair}
 @media(max-width:600px){.fortress-hotspot{min-width:102px;max-width:124px;padding:5px}.fortress-hotspot .gate-visual{height:65px}.fortress-hotspot strong{font-size:11px}}
+
+/* Targeted mobile fixes — fortress emblem, painting swatch, heroes actions */
+.fortress-brand-emblem{width:104px;height:104px;margin:0 auto 10px;border-radius:22px;overflow:hidden;border:2px solid #f5d77c;box-shadow:0 0 26px #f4c35a88,0 10px 25px #0008;background:#123b2a}
+.fortress-brand-emblem img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
+.brand-mini-fort{display:inline-block;vertical-align:middle;width:27px;height:27px;margin-inline-end:5px;border-radius:7px;background:url('castle-hero.jpg') center/cover;border:1px solid #e7c270;box-shadow:0 0 9px #f6dd8e55}
+.heroes-actions{display:flex;flex-direction:column;align-items:center;gap:14px;margin:24px auto 5px;max-width:470px}
+.heroes-actions .btn{display:block;width:100%;margin:0;text-decoration:none;text-align:center;white-space:normal;line-height:1.6;overflow-wrap:anywhere}
+.paint-color-label{display:flex!important;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center}
+.paint-color-preview{display:inline-block;width:37px;height:37px;border:3px solid #ffe2a0;border-radius:50%;background:#0b5c3b;box-shadow:0 3px 12px #0006;flex:none}
+#paintColor{appearance:auto;-webkit-appearance:auto;display:inline-block!important;width:52px!important;height:44px!important;min-width:52px!important;padding:3px!important;background:transparent!important;border:1px solid #e7bd67!important;border-radius:12px!important;cursor:pointer;flex:none}
+#paintColor::-webkit-color-swatch-wrapper{padding:2px}
+#paintColor::-webkit-color-swatch{border:2px solid #ffe2a0;border-radius:8px}
+@media(max-width:600px){.heroes-actions{width:100%}.heroes-actions .btn{font-size:clamp(15px,4vw,19px);padding:13px 12px}.fortress-brand-emblem{width:88px;height:88px}}
 </style></head>
 <body>
 <div id="gate">
  <div class="doors"><i></i><i></i></div>
  <div class="in">
-  <div style="font-size:64px">🏰</div>
+  <div class="fortress-brand-emblem" aria-hidden="true"><img src="castle-hero.jpg" alt=""></div>
   <h1 style="font-size:clamp(42px,11vw,80px)">حصن الوطن</h1>
   <p style="font-size:20px">بصمتك تصنع المجد</p>
   <p style="opacity:.85">«معًا نبني حصن الوفاء لوطننا الغالي»</p>
@@ -351,7 +364,7 @@ main{padding:12px 10px 60px}
 <audio id="nationalSong" src="biladi.m4a" preload="auto" loop playsinline></audio>
 
 <header>
- <b>🏰 حصن الوطن</b>
+ <b><span class="brand-mini-fort" aria-hidden="true"></span> حصن الوطن</b>
  <nav id="nav">
   <a href="#home">الرئيسية</a><a href="#submit">بصمتي للوطن</a><a href="#fort">حصن الوفاء</a><a href="#gallery">المعرض</a><a href="#heroes">حماة الوطن</a><a href="#leadership">قيادة الوطن</a><a href="#mission">رحلة الوفاء</a><a href="#kids">🎙️ رسائل صوتية</a><a href="#studio">🎨 المرسم</a><a href="#about">عن المبادرة</a><a href="#certificate">الشهادة</a><a href="#admin">⚙️ الإدارة والاعتماد</a>
  </nav>
@@ -432,7 +445,7 @@ main{padding:12px 10px 60px}
 </section>
 
 <section class="view" id="v-certificate"><div class="back"><a href="#home" class="btn alt">⟵ الرئيسية</a></div><div class="card" style="text-align:center"><h2>🏅 شهادة المشاركة</h2><p>شهادة تذكارية لكل مشارك بعد إرسال بصمته. نشر المشاركة في المعرض يحتاج اعتماد الإدارة.</p><img src="certificate-approved.png" alt="التصميم الذهبي المعتمد لشهادة حصن الوطن" style="width:100%;max-width:800px;border-radius:15px;border:2px solid #d9ad45"><p id="certificatePageStatus">للحصول على شهادة باسمك، أرسلي بصمتك أولًا.</p><button type="button" class="btn" id="certificatePageDownload">عرض شهادتي وتحميلها</button> <a class="btn alt" href="#submit">إرسال بصمة جديدة</a></div></section>
-<section class="view" id="v-studio"><div class="back"><a class="btn alt" href="#home">⟵ الرئيسية</a></div><div class="card" style="text-align:center"><h2>🎨 مرسم حماة الوطن</h2><p>ارسمي لوحة تعبّر عن امتنانك لحماة الوطن، ثم أرسليها للمراجعة.</p><label for="artistName">اسم المشاركة</label><input id="artistName" maxlength="40" placeholder="اسم الطالبة أو المشارك"><div class="drawing-tools"><label>اللون <input type="color" id="paintColor" value="#0b5c3b" aria-label="لون الفرشاة"></label><label>حجم الفرشاة <input type="range" id="paintSize" min="2" max="30" value="7"></label><button type="button" class="btn alt" id="paintUndo">تراجع</button><button type="button" class="btn alt" id="paintClear">مسح اللوحة</button></div><canvas id="paintCanvas" width="1000" height="700" aria-label="لوحة رسم تفاعلية باللمس"></canvas><p><button type="button" class="btn" id="paintSubmit">إرسال لوحتي للمراجعة</button> <button type="button" class="btn alt" id="paintSave">حفظ الصورة</button></p><small>لا تُنشر اللوحة إلا بعد موافقة الإدارة. يرجى موافقة ولي الأمر على مشاركات الأطفال.</small></div></section>
+<section class="view" id="v-studio"><div class="back"><a class="btn alt" href="#home">⟵ الرئيسية</a></div><div class="card" style="text-align:center"><h2>🎨 مرسم حماة الوطن</h2><p>ارسمي لوحة تعبّر عن امتنانك لحماة الوطن، ثم أرسليها للمراجعة.</p><label for="artistName">اسم المشاركة</label><input id="artistName" maxlength="40" placeholder="اسم الطالبة أو المشارك"><div class="drawing-tools"><label class="paint-color-label">اللون <span id="paintColorPreview" class="paint-color-preview" aria-hidden="true"></span><input type="color" id="paintColor" value="#0b5c3b" aria-label="اختيار لون الفرشاة"></label><label>حجم الفرشاة <input type="range" id="paintSize" min="2" max="30" value="7"></label><button type="button" class="btn alt" id="paintUndo">تراجع</button><button type="button" class="btn alt" id="paintClear">مسح اللوحة</button></div><canvas id="paintCanvas" width="1000" height="700" aria-label="لوحة رسم تفاعلية باللمس"></canvas><p><button type="button" class="btn" id="paintSubmit">إرسال لوحتي للمراجعة</button> <button type="button" class="btn alt" id="paintSave">حفظ الصورة</button></p><small>لا تُنشر اللوحة إلا بعد موافقة الإدارة. يرجى موافقة ولي الأمر على مشاركات الأطفال.</small></div></section>
 <section class="view" id="v-fort">
  <div class="back"><a href="#home"><button class="btn alt">⟵ الرئيسية</button></a></div>
  <h2>حصن الوفاء التفاعلي</h2>
@@ -454,7 +467,7 @@ main{padding:12px 10px 60px}
  <div class="card" style="text-align:center"><h2>🇸🇦 حماة الوطن.. فخرنا وأماننا</h2>
  <img src="homat-alwatan.webp" class="soldier-hero" alt="مشهد وطني سينمائي لجنود الوطن" loading="lazy">
  <p style="font-size:20px">إلى جنودنا البواسل، أنتم درع الوطن وعنوان عزته. شكرًا لسهرِكم وتضحياتكم في سبيل أمنه وسلامته.</p>
- <a class="btn" href="#kids">أرسل رسالة صوتية إلى حماة الوطن</a> <a class="btn alt" href="#submit">اكتب رسالة إلى حماة الوطن</a></div>
+ <div class="heroes-actions"><a class="btn" href="#kids">أرسل رسالة صوتية إلى حماة الوطن</a><a class="btn alt" href="#submit">اكتب رسالة إلى حماة الوطن</a></div></div>
 </section>
 <section class="view" id="v-leadership">
  <div class="back"><a href="#home"><button class="btn alt">⟵ الرئيسية</button></a></div>
@@ -701,7 +714,20 @@ async function showCertificate(){
   panel.querySelector('#closeCertificate').onclick=()=>{panel.classList.remove('on');document.body.style.overflow='';};
   panel.querySelector('#printCertButton').onclick=()=>{
    const w=window.open('','_blank');if(!w){toast('اسمحي بفتح النوافذ المنبثقة، أو احفظي الصورة أولًا ثم اطبعيها.');return;}
-   w.document.write('<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><title>شهادة مشاركة</title><style>@page{size:A4 landscape;margin:0}body{margin:0;background:white}img{width:100%;height:auto;display:block}@media print{img{width:297mm;height:198mm}}</style></head><body><img id="c" alt="شهادة المشاركة"></body></html>');w.document.close();w.document.getElementById('c').src=certificateImageUrl;
+   w.document.write('<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><title>شهادة مشاركة</title><style>@page{size:A4 landscape;margin:0}body{margin:0;background:white}img{width:100%;height:auto;display:block}@media print{img{width:297mm;height:198mm}}
+/* Targeted mobile fixes — fortress emblem, painting swatch, heroes actions */
+.fortress-brand-emblem{width:104px;height:104px;margin:0 auto 10px;border-radius:22px;overflow:hidden;border:2px solid #f5d77c;box-shadow:0 0 26px #f4c35a88,0 10px 25px #0008;background:#123b2a}
+.fortress-brand-emblem img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
+.brand-mini-fort{display:inline-block;vertical-align:middle;width:27px;height:27px;margin-inline-end:5px;border-radius:7px;background:url('castle-hero.jpg') center/cover;border:1px solid #e7c270;box-shadow:0 0 9px #f6dd8e55}
+.heroes-actions{display:flex;flex-direction:column;align-items:center;gap:14px;margin:24px auto 5px;max-width:470px}
+.heroes-actions .btn{display:block;width:100%;margin:0;text-decoration:none;text-align:center;white-space:normal;line-height:1.6;overflow-wrap:anywhere}
+.paint-color-label{display:flex!important;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center}
+.paint-color-preview{display:inline-block;width:37px;height:37px;border:3px solid #ffe2a0;border-radius:50%;background:#0b5c3b;box-shadow:0 3px 12px #0006;flex:none}
+#paintColor{appearance:auto;-webkit-appearance:auto;display:inline-block!important;width:52px!important;height:44px!important;min-width:52px!important;padding:3px!important;background:transparent!important;border:1px solid #e7bd67!important;border-radius:12px!important;cursor:pointer;flex:none}
+#paintColor::-webkit-color-swatch-wrapper{padding:2px}
+#paintColor::-webkit-color-swatch{border:2px solid #ffe2a0;border-radius:8px}
+@media(max-width:600px){.heroes-actions{width:100%}.heroes-actions .btn{font-size:clamp(15px,4vw,19px);padding:13px 12px}.fortress-brand-emblem{width:88px;height:88px}}
+</style></head><body><img id="c" alt="شهادة المشاركة"></body></html>');w.document.close();w.document.getElementById('c').src=certificateImageUrl;
    w.document.getElementById('c').onload=()=>{w.focus();w.print();};
   };
   panel.classList.add('on');document.body.style.overflow='hidden';
@@ -929,6 +955,9 @@ document.getElementById('certificatePageDownload').addEventListener('click',()=>
 // Touch drawing studio. The canvas stays entirely local until the visitor submits.
 (function(){
  const c=document.getElementById('paintCanvas'),ctx=c.getContext('2d'),color=document.getElementById('paintColor'),size=document.getElementById('paintSize');
+ const colorPreview=document.getElementById('paintColorPreview');
+ function syncPaintColor(){colorPreview.style.backgroundColor=color.value;colorPreview.setAttribute('title',color.value)}
+ color.addEventListener('input',syncPaintColor);color.addEventListener('change',syncPaintColor);syncPaintColor();
  const history=[];let drawing=false,last=null;
  function blank(){ctx.fillStyle='#fff';ctx.fillRect(0,0,c.width,c.height)}blank();
  function snapshot(){if(history.length>=15)history.shift();history.push(ctx.getImageData(0,0,c.width,c.height))}
