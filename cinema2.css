@@ -1,0 +1,36 @@
+/* v3: الولد والبنت، الحصن، المتحف، الجدار، أبطال الوفاء */
+.courtyard{position:relative;padding-bottom:clamp(150px,22vw,240px)}
+.fortress-hotspot.has-boy>span{display:none}
+.has-boy .boy{display:block;width:88px;height:88px;object-fit:cover;object-position:50% 35%;border-radius:44px 44px 12px 12px;border:2px solid #ffdb8c;margin:0 auto 6px;box-shadow:0 0 22px #f6dd8e99}
+.girl-fig{position:absolute;bottom:0;left:0;height:clamp(150px,22vw,300px);pointer-events:none;z-index:3;filter:drop-shadow(0 8px 14px #000a)}
+/* المتحف */
+#v-museum .museum-artworks{display:flex!important;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;padding:46px 14vw 66px;perspective:900px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+#v-museum .museum-artworks::-webkit-scrollbar{display:none}
+#v-museum .museum-artworks>*{flex:0 0 min(72vw,340px);scroll-snap-align:center;border:3px solid #e7bf73!important;border-radius:6px!important;background:#0b1f1c;box-shadow:0 30px 60px #000c,0 0 0 8px #3a2a0c,0 0 0 10px #e7bf73;transition:opacity .3s}
+.museum-hall::before{content:"";position:absolute;left:-20%;right:-20%;bottom:0;height:36%;background:linear-gradient(#0000,#000b),repeating-linear-gradient(90deg,#e7bf7326 0 2px,transparent 2px 64px);transform:perspective(500px) rotateX(62deg);transform-origin:bottom;pointer-events:none}
+.museum-lightbox{backdrop-filter:blur(16px);background:rgba(0,0,0,.9)!important}
+.museum-lightbox-inner{animation:pop .7s both}
+/* جدار الوفاء */
+#v-wall .wall-stage{min-height:78vh;display:flex;flex-direction:column;justify-content:center;background:#000!important}
+#wallItems{position:relative;z-index:2}
+#wallItems::before{content:"";position:absolute;inset:-70%;z-index:-1;pointer-events:none;background:conic-gradient(transparent 0 8%,rgba(246,221,142,.13) 10%,transparent 12% 30%,rgba(246,221,142,.1) 33%,transparent 35% 60%,rgba(246,221,142,.12) 63%,transparent 65%);animation:spin 70s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.wall-note{background:none!important;border:0!important;box-shadow:none!important;text-align:center;max-width:780px;margin:auto;padding:30px 18px}
+.wall-note h3{font-size:clamp(28px,6vw,52px);color:#ffe9b0;text-shadow:0 0 30px #d9ad45aa;animation:rise 1.4s both}
+.wall-note p{font-size:clamp(20px,3.6vw,30px);line-height:2.1;animation:rise 1.4s .4s both}
+.wall-quote{font-size:90px;color:#d9ad45;opacity:.55}
+#wallProg{position:absolute;left:0;bottom:3.5%;height:3px;width:100%;background:linear-gradient(90deg,#d9ad45,#fff3c4);transform-origin:right;z-index:4;animation:wfill 8s linear}
+@keyframes wfill{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+/* أبطال الوفاء: فصول متتابعة */
+.kid-step[hidden]{display:none!important}
+.kid-step{min-height:46vh;display:flex;flex-direction:column;justify-content:center;text-align:center}
+.step-number{font-size:84px;line-height:1;color:#f6dd8e;text-shadow:0 0 34px #d9ad45}
+.kid-nav{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:18px 0}
+#kidDots{color:#f6dd8e;letter-spacing:6px;font-size:20px}
+.kid-world:not([data-last="1"]) :is(.kid-envelope-stage,#kidContinue,.kid-note){display:none}
+/* تحسينات بعد المراجعة البصرية: الرسالة تظهر أسفل العنوان مباشرة، والأزرار بعدها */
+#v-wall .wall-stage{justify-content:flex-start;padding-bottom:28px}
+#v-wall .wall-stage>h2{order:1}#v-wall .wall-stage>p{order:2}
+#wallItems{order:3;min-height:260px}.wall-controls{order:4}#v-wall .wall-stage>small{order:5}
+.wall-quote{font-size:64px;line-height:1;margin-top:6px}
+.step-number{font-size:56px;display:block;margin:0 auto 6px}
