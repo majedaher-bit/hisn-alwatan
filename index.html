@@ -713,8 +713,7 @@ async function showCertificate(){
   panel.querySelector('#closeCertificate').onclick=()=>{panel.classList.remove('on');document.body.style.overflow='';};
   panel.querySelector('#printCertButton').onclick=()=>{
    const w=window.open('','_blank');if(!w){toast('اسمحي بفتح النوافذ المنبثقة، أو احفظي الصورة أولًا ثم اطبعيها.');return;}
-   w.document.write(`<!doctype html><html lang="ar"><head><meta name="viewport" content="width=device-width,initial-scale=1"><title>شهادة مشاركة</title><style>@page{size:A4 landscape;margin:0}body{margin:0;background:white}img{width:100%;height:auto;display:block}@media print{img{width:297mm;height:198mm;object-fit:contain}}</style></head><body><img id="c" alt="شهادة المشاركة"></body></html>`);
-   w.document.close();w.document.getElementById('c').src=certificateImageUrl;
+   w.document.write(`<!doctype html><html lang="ar"><head><meta name="viewport" content="width=device-width,initial-scale=1"><title>شهادة مشاركة</title><style>@page{size:A4 landscape;margin:0}body{margin:0;background:white}img{width:100%;height:auto;display:block}@media print{img{width:297mm;height:198mm}}</style></head><body><img id="c" alt="شهادة المشاركة"></body></html>`);w.document.close();w.document.getElementById('c').src=certificateImageUrl;
    w.document.getElementById('c').onload=()=>{w.focus();w.print();};
   };
   panel.classList.add('on');document.body.style.overflow='hidden';
