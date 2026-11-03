@@ -236,6 +236,13 @@ main{padding:12px 10px 60px}
   #v-home .credit-ribbon{font-size:14px}
 }
 @media(max-width:390px){#v-home .cinematic-hero{min-height:590px}#v-home .cinematic-copy p{font-size:15px}}
+
+/* Unified visual gates and illuminated fortress illustration */
+.fortress-map .gate-visual img{width:100%;height:100%;object-fit:cover;display:block;border-radius:inherit}
+.fort-concept{max-width:1100px;margin:14px auto 22px;text-align:center}
+.fort-concept img{display:block;width:100%;height:auto;border:2px solid #d8b25d;border-radius:18px}
+.fort-concept p{font-size:14px;color:#ffe7b1;margin:8px 0}
+#paintCanvas{touch-action:none;max-width:100%;background:white;border-radius:12px}
 </style>
 
 <style>
@@ -371,12 +378,12 @@ main{padding:12px 10px 60px}
  <div class="courtyard" aria-label="ساحة الحصن التفاعلية">
  <div class="court-heading"><h2>ساحة حصن الوطن</h2><p>المسي أحد معالم الحصن لتبدئي تجربة مختلفة</p></div>
  <div class="fortress-map" aria-label="اختاري أحد المعالم المضيئة للدخول إلى تجربته">
-  <a class="fortress-hotspot spot-watch" href="#heroes"><span class="gate-visual"><img src="homat-alwatan.webp" alt="" loading="lazy"></span><strong>برج الحماة</strong></a>
-  <a class="fortress-hotspot spot-challenge" href="#mission"><span class="gate-visual"><img src="castle-hero.jpg" alt="" loading="lazy"></span><strong>ميدان الوفاء</strong></a>
-  <a class="fortress-hotspot spot-message" href="#kids"><span class="gate-visual"><img src="boy-gate.webp" alt="" loading="lazy"></span><strong>بوابة الرسائل</strong></a>
-  <a class="fortress-hotspot spot-wall" href="#fort"><span class="gate-visual"><img src="castle-hero.jpg" alt="" loading="lazy"></span><strong>حصن اللبنات</strong></a>
-  <a class="fortress-hotspot spot-gallery" href="#studio"><span class="gate-visual"><img src="girl-front.png" alt="" loading="lazy"></span><strong>متحف الإبداع</strong></a>
-  <a class="fortress-hotspot spot-leaders" href="#leadership"><span class="gate-visual"><img src="national-skyline.jpg" alt="" loading="lazy"></span><strong>قاعة القيادة</strong></a>
+  <a class="fortress-hotspot spot-watch" href="#heroes"><span class="gate-visual"><img src="01_basmaty.png" alt="" loading="lazy"></span><strong>برج الحماة</strong></a>
+  <a class="fortress-hotspot spot-challenge" href="#mission"><span class="gate-visual"><img src="02_haris_alwafaa.png" alt="" loading="lazy"></span><strong>ميدان الوفاء</strong></a>
+  <a class="fortress-hotspot spot-message" href="#kids"><span class="gate-visual"><img src="03_mathaf_alwafaa.png" alt="" loading="lazy"></span><strong>بوابة الرسائل</strong></a>
+  <a class="fortress-hotspot spot-wall" href="#fort"><span class="gate-visual"><img src="04_jidar_alwafaa.png" alt="" loading="lazy"></span><strong>حصن اللبنات</strong></a>
+  <a class="fortress-hotspot spot-gallery" href="#studio"><span class="gate-visual"><img src="05_almaarad.png" alt="" loading="lazy"></span><strong>مرسم الإبداع</strong></a>
+  <a class="fortress-hotspot spot-leaders" href="#leadership"><span class="gate-visual"><img src="06_rukn_alqiyada.png" alt="" loading="lazy"></span><strong>قاعة القيادة</strong></a>
  </div><p class="fortress-map-tip">المسي المعلم المضيء للانتقال إليه · لكل معلم تجربة مختلفة</p></div>
 
  <div class="national-quote"><strong>وطني... قصة مجد مستمرة</strong><p>كل بصمة وفاء تصنع أثرًا، وكل مشاركة معتمدة تضيء لبنة في حصن الوطن.</p></div>
@@ -429,6 +436,7 @@ main{padding:12px 10px 60px}
 <section class="view" id="v-fort">
  <div class="back"><a href="#home"><button class="btn alt">⟵ الرئيسية</button></a></div>
  <h2>حصن الوفاء التفاعلي</h2>
+ <div class="fort-concept"><img src="fortress-illumination-preview.png" alt="تصور فني للحصن المضيء ومراحل تطوره" loading="lazy"><p>تصور فني للحصن عند ازدياد المشاركات. الحصن ثلاثي الأبعاد بالأسفل يعرض اللبنات الفعلية المعتمدة.</p></div>
  <canvas id="stage" aria-label="حصن ثلاثي الأبعاد"></canvas>
  <p style="text-align:center;opacity:.8;font-size:14px">اسحب للتدوير · اضغط على لبنة لقراءة البصمة</p>
  <div class="stats"><div class="card stat"><b data-c="approved">0</b>لبنة مضيئة</div><div class="card stat"><b id="pct2">0%</b>هدف الحصن: <span id="goalTxt"></span></div></div>
