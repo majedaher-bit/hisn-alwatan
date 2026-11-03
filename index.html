@@ -214,6 +214,28 @@ main{padding:12px 10px 60px}
 }
 @media(prefers-reduced-motion:reduce){.fortress-hotspot{animation:none}}
 
+
+/* تحسين العرض السينمائي على الجوال والشاشات الواسعة دون تغيير وظائف الموقع */
+@media(min-width:1100px){
+  main{max-width:1600px;padding-inline:clamp(20px,3vw,55px)}
+  #v-home .cinematic-hero{min-height:min(82vh,900px);background-position:center 45%;border-radius:30px}
+  #v-home .cinematic-copy{padding-bottom:48px}
+  #v-home .courtyard{min-height:700px}
+  #v-home .home-stats{max-width:1200px;margin:20px auto}
+}
+@media(max-width:700px){
+  #v-home .cinematic-hero{min-height:clamp(540px,77svh,760px);background-position:51% center;border-radius:19px}
+  #v-home .cinematic-copy{padding:120px 16px 32px;background:linear-gradient(transparent,rgba(3,29,20,.76) 42%,#04251af5 100%)}
+  #v-home .cinematic-copy h1{font-size:clamp(42px,10vw,64px)}
+  #v-home .cinematic-copy h2{font-size:clamp(23px,5.4vw,34px)}
+  #v-home .hero-cta{max-width:100%;white-space:normal;justify-content:center}
+  #v-home .home-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+  #v-home .home-stat{min-width:0}
+  #v-home .courtyard{min-height:590px}
+  #v-home .fortress-hotspot{max-width:42%;font-size:clamp(12px,3vw,15px)}
+  #v-home .credit-ribbon{font-size:14px}
+}
+@media(max-width:390px){#v-home .cinematic-hero{min-height:590px}#v-home .cinematic-copy p{font-size:15px}}
 </style>
 
 <style>
@@ -295,7 +317,16 @@ main{padding:12px 10px 60px}
 </style>
 <link rel="stylesheet" href="cinema.css?v=5">
 <link rel="stylesheet" href="cinema2.css?v=5">
-</head>
+<style>
+.fortress-hotspot .gate-visual{display:block;width:100%;height:82px;overflow:hidden;border-radius:12px;border:2px solid #f7d48b;box-shadow:0 5px 20px #0008}
+.fortress-hotspot .gate-visual img{display:block;width:100%;height:100%;object-fit:cover}
+.fortress-hotspot{min-width:122px;max-width:155px;gap:5px}
+.fortress-hotspot strong{white-space:normal;line-height:1.3}
+.drawing-tools{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:center;margin:15px auto}
+.drawing-tools label{display:flex;align-items:center;gap:7px}
+#paintCanvas{display:block;width:100%;height:auto;aspect-ratio:10/7;background:#fff;border:4px solid #d9ad45;border-radius:15px;touch-action:none;cursor:crosshair}
+@media(max-width:600px){.fortress-hotspot{min-width:102px;max-width:124px;padding:5px}.fortress-hotspot .gate-visual{height:65px}.fortress-hotspot strong{font-size:11px}}
+</style></head>
 <body>
 <div id="gate">
  <div class="doors"><i></i><i></i></div>
@@ -315,7 +346,7 @@ main{padding:12px 10px 60px}
 <header>
  <b>🏰 حصن الوطن</b>
  <nav id="nav">
-  <a href="#home">الرئيسية</a><a href="#submit">بصمتي للوطن</a><a href="#fort">حصن الوفاء</a><a href="#gallery">المعرض</a><a href="#heroes">حماة الوطن</a><a href="#leadership">قيادة الوطن</a><a href="#mission">رحلة الوفاء</a><a href="#kids">أبطال الوفاء</a><a href="#about">عن المبادرة</a><a href="#submit">الشهادة</a><a href="#admin">⚙️ الإدارة والاعتماد</a>
+  <a href="#home">الرئيسية</a><a href="#submit">بصمتي للوطن</a><a href="#fort">حصن الوفاء</a><a href="#gallery">المعرض</a><a href="#heroes">حماة الوطن</a><a href="#leadership">قيادة الوطن</a><a href="#mission">رحلة الوفاء</a><a href="#kids">🎙️ رسائل صوتية</a><a href="#studio">🎨 المرسم</a><a href="#about">عن المبادرة</a><a href="#certificate">الشهادة</a><a href="#admin">⚙️ الإدارة والاعتماد</a>
  </nav>
  <button class="ic" id="snd" title="الصوت" aria-label="تشغيل أو كتم الصوت">🔇</button>
 </header>
@@ -340,12 +371,12 @@ main{padding:12px 10px 60px}
  <div class="courtyard" aria-label="ساحة الحصن التفاعلية">
  <div class="court-heading"><h2>ساحة حصن الوطن</h2><p>المسي أحد معالم الحصن لتبدئي تجربة مختلفة</p></div>
  <div class="fortress-map" aria-label="اختاري أحد المعالم المضيئة للدخول إلى تجربته">
-  <a class="fortress-hotspot spot-watch" href="#heroes"><span>🛡️</span><strong>برج الحماة</strong></a>
-  <a class="fortress-hotspot spot-challenge" href="#mission"><span>🧭</span><strong>ميدان الوفاء</strong></a>
-  <a class="fortress-hotspot spot-message" href="#submit"><span>✉️</span><strong>بوابة الرسائل</strong></a>
-  <a class="fortress-hotspot spot-wall" href="#fort"><span>🧱</span><strong>حصن اللبنات</strong></a>
-  <a class="fortress-hotspot spot-gallery" href="#gallery"><span>🎨</span><strong>متحف الإبداع</strong></a>
-  <a class="fortress-hotspot spot-leaders" href="#leadership"><span>🇸🇦</span><strong>قاعة القيادة</strong></a>
+  <a class="fortress-hotspot spot-watch" href="#heroes"><span class="gate-visual"><img src="homat-alwatan.webp" alt="" loading="lazy"></span><strong>برج الحماة</strong></a>
+  <a class="fortress-hotspot spot-challenge" href="#mission"><span class="gate-visual"><img src="castle-hero.jpg" alt="" loading="lazy"></span><strong>ميدان الوفاء</strong></a>
+  <a class="fortress-hotspot spot-message" href="#kids"><span class="gate-visual"><img src="boy-gate.webp" alt="" loading="lazy"></span><strong>بوابة الرسائل</strong></a>
+  <a class="fortress-hotspot spot-wall" href="#fort"><span class="gate-visual"><img src="castle-hero.jpg" alt="" loading="lazy"></span><strong>حصن اللبنات</strong></a>
+  <a class="fortress-hotspot spot-gallery" href="#studio"><span class="gate-visual"><img src="girl-front.png" alt="" loading="lazy"></span><strong>متحف الإبداع</strong></a>
+  <a class="fortress-hotspot spot-leaders" href="#leadership"><span class="gate-visual"><img src="national-skyline.jpg" alt="" loading="lazy"></span><strong>قاعة القيادة</strong></a>
  </div><p class="fortress-map-tip">المسي المعلم المضيء للانتقال إليه · لكل معلم تجربة مختلفة</p></div>
 
  <div class="national-quote"><strong>وطني... قصة مجد مستمرة</strong><p>كل بصمة وفاء تصنع أثرًا، وكل مشاركة معتمدة تضيء لبنة في حصن الوطن.</p></div>
@@ -393,6 +424,8 @@ main{padding:12px 10px 60px}
  </div>
 </section>
 
+<section class="view" id="v-certificate"><div class="back"><a href="#home" class="btn alt">⟵ الرئيسية</a></div><div class="card" style="text-align:center"><h2>🏅 شهادة المشاركة</h2><p>شهادة تذكارية لكل مشارك بعد إرسال بصمته. نشر المشاركة في المعرض يحتاج اعتماد الإدارة.</p><img src="certificate-approved.png" alt="التصميم الذهبي المعتمد لشهادة حصن الوطن" style="width:100%;max-width:800px;border-radius:15px;border:2px solid #d9ad45"><p id="certificatePageStatus">للحصول على شهادة باسمك، أرسلي بصمتك أولًا.</p><button type="button" class="btn" id="certificatePageDownload">عرض شهادتي وتحميلها</button> <a class="btn alt" href="#submit">إرسال بصمة جديدة</a></div></section>
+<section class="view" id="v-studio"><div class="back"><a class="btn alt" href="#home">⟵ الرئيسية</a></div><div class="card" style="text-align:center"><h2>🎨 مرسم حماة الوطن</h2><p>ارسمي لوحة تعبّر عن امتنانك لحماة الوطن، ثم أرسليها للمراجعة.</p><label for="artistName">اسم المشاركة</label><input id="artistName" maxlength="40" placeholder="اسم الطالبة أو المشارك"><div class="drawing-tools"><label>اللون <input type="color" id="paintColor" value="#0b5c3b" aria-label="لون الفرشاة"></label><label>حجم الفرشاة <input type="range" id="paintSize" min="2" max="30" value="7"></label><button type="button" class="btn alt" id="paintUndo">تراجع</button><button type="button" class="btn alt" id="paintClear">مسح اللوحة</button></div><canvas id="paintCanvas" width="1000" height="700" aria-label="لوحة رسم تفاعلية باللمس"></canvas><p><button type="button" class="btn" id="paintSubmit">إرسال لوحتي للمراجعة</button> <button type="button" class="btn alt" id="paintSave">حفظ الصورة</button></p><small>لا تُنشر اللوحة إلا بعد موافقة الإدارة. يرجى موافقة ولي الأمر على مشاركات الأطفال.</small></div></section>
 <section class="view" id="v-fort">
  <div class="back"><a href="#home"><button class="btn alt">⟵ الرئيسية</button></a></div>
  <h2>حصن الوفاء التفاعلي</h2>
@@ -413,7 +446,7 @@ main{padding:12px 10px 60px}
  <div class="card" style="text-align:center"><h2>🇸🇦 حماة الوطن.. فخرنا وأماننا</h2>
  <img src="homat-alwatan.webp" class="soldier-hero" alt="مشهد وطني سينمائي لجنود الوطن" loading="lazy">
  <p style="font-size:20px">إلى جنودنا البواسل، أنتم درع الوطن وعنوان عزته. شكرًا لسهرِكم وتضحياتكم في سبيل أمنه وسلامته.</p>
- <a href="#submit"><button class="btn">اكتب رسالة إلى حماة الوطن</button></a></div>
+ <a class="btn" href="#kids">أرسل رسالة صوتية إلى حماة الوطن</a> <a class="btn alt" href="#submit">اكتب رسالة إلى حماة الوطن</a></div>
 </section>
 <section class="view" id="v-leadership">
  <div class="back"><a href="#home"><button class="btn alt">⟵ الرئيسية</button></a></div>
@@ -491,7 +524,7 @@ main{padding:12px 10px 60px}
  <div class="back"><a href="#home"><button class="btn alt">⟵ الرئيسية</button></a></div>
  <div class="card"><h2>لوحة التحكم الإدارية</h2>
   <div id="login"><label>البريد الإلكتروني</label><input id="le" type="email" autocomplete="username"><label>كلمة المرور</label><input id="lp" type="password" autocomplete="current-password"><button class="btn" id="lg">دخول</button></div>
-  <div id="panel" style="display:none"><button class="btn alt" id="lo">تسجيل الخروج</button><button class="btn alt" id="lc">🧹 تنظيف الملفات اليتيمة</button><div id="al"></div></div></div>
+  <div id="panel" style="display:none"><button class="btn alt" id="lo">تسجيل الخروج</button><button class="btn alt" id="lc">🧹 تنظيف الملفات اليتيمة</button><div style="margin:14px 0;display:flex;gap:8px;flex-wrap:wrap"><button type="button" class="btn" id="showPending">📥 بانتظار المراجعة</button><button type="button" class="btn alt" id="showHistory">📁 سجل المشاركات السابقة</button></div><p id="adminQueueTitle" style="margin:10px 0"></p><div id="al"></div></div></div>
 </section>
 </main>
 <footer>الابتدائية الرابعة بالقطيف · إعداد وتنفيذ: ماجدة محمد ارحيمان · مديرة المدرسة: نسرين عبدالله المحسن</footer>
@@ -499,7 +532,7 @@ main{padding:12px 10px 60px}
 <div id="modal"><div class="card"><div id="mb"></div><button class="btn" onclick="document.getElementById('modal').classList.remove('on')">إغلاق</button></div></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
-<script src="vendor/three.min.js" onerror="this.onerror=null;this.src='https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js'"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 const $=s=>document.querySelector(s),GOAL=100;
 // إعداد الاتصال: الصقي رابط المشروع والمفتاح العام Publishable هنا فقط.
@@ -555,12 +588,16 @@ $('#enter').onclick=()=>{
 };
 $('#skip').onclick=()=>{startSong();closeGate();};
 // router
-const views=['home','mission','submit','fort','gallery','heroes','leadership','kids','museum','wall','medal','about','admin'];
+const views=['home','mission','certificate','studio','submit','fort','gallery','heroes','leadership','kids','museum','wall','medal','about','admin'];
 function route(){let h=(location.hash||'#home').slice(1);if(!views.includes(h))h='home';
  document.querySelectorAll('.view').forEach(v=>v.classList.toggle('on',v.id==='v-'+h));
  document.querySelectorAll('nav a').forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+h));
  if(h==='fort')setTimeout(()=>{resize();syncBricks()},50);scrollTo(0,0)}
 addEventListener('hashchange',route);
+// Admin queue shows pending submissions by default. Historical submissions remain accessible.
+let ADMIN_HISTORY=false;
+$('#showPending').onclick=()=>{ADMIN_HISTORY=false;render()};
+$('#showHistory').onclick=()=>{ADMIN_HISTORY=true;render()};
 // render
 function render(){$('#login').style.display=ADMIN?'none':'block';$('#panel').style.display=ADMIN?'block':'none';$('#pst').style.display=ADMIN?'':'none';$('#cfg').style.display=CONFIGURED?'none':'block';const a=ap().length,p=DB.filter(d=>d.s==='pending').length,pc=Math.min(100,Math.round(a/GOAL*100))+'%';
  document.querySelectorAll('[data-c=approved]').forEach(e=>e.textContent=a);
@@ -568,8 +605,10 @@ function render(){$('#login').style.display=ADMIN?'none':'block';$('#panel').sty
  $('#pct').textContent=pc;$('#pct2').textContent=pc;$('#goalTxt').textContent=GOAL+' لبنة';
  const q=$('#q').value.trim();
  $('#gl').innerHTML=ap().filter(d=>d.h.includes(q)).map(d=>`<div class="msg"><b>${esc(d.h)}</b><span class="tag">${esc(d.t)}</span><br>${esc(d.x)}<br>${media(d)}<br><small>— ${esc(d.n)} (${esc(d.c)}${d.r?'، '+esc(d.r):''})</small></div>`).join('')||'<p style="opacity:.8">لا توجد مشاركات معتمدة بعد.</p>';
- $('#al').innerHTML=DB.map(d=>`<div class="msg"><b>${esc(d.h)}</b> <span class="tag">${d.s==='approved'?'معتمدة':d.s==='rejected'?'مرفوضة':'قيد الانتظار'}</span><br>${esc(d.x)}<br>${media(d)}<br><small>${esc(d.n)} · ${esc(d.c)}${d.r?' · '+esc(d.r):''}</small><br>
- <button type="button" class="btn" data-action="approved" data-id="${esc(d.id)}">قبول</button><button type="button" class="btn alt" data-action="rejected" data-id="${esc(d.id)}">رفض</button><button type="button" class="btn alt" data-action="pending" data-id="${esc(d.id)}">إخفاء</button><button type="button" class="btn alt" data-action="delete" data-id="${esc(d.id)}">حذف</button></div>`).join('')||'<p>لا توجد مشاركات.</p>';
+ $('#adminQueueTitle').textContent=ADMIN_HISTORY?'سجل المشاركات المعتمدة والمرفوضة ('+DB.filter(d=>d.s!=='pending').length+')':'مشاركات بانتظار المراجعة ('+p+')';
+ $('#showPending').className=ADMIN_HISTORY?'btn alt':'btn';$('#showHistory').className=ADMIN_HISTORY?'btn':'btn alt';
+ $('#al').innerHTML=DB.filter(d=>ADMIN_HISTORY?d.s!=='pending':d.s==='pending').map(d=>`<div class="msg"><b>${esc(d.h)}</b> <span class="tag">${d.s==='approved'?'معتمدة':d.s==='rejected'?'مرفوضة':'قيد الانتظار'}</span><br>${esc(d.x)}<br>${media(d)}<br><small>${esc(d.n)} · ${esc(d.c)}${d.r?' · '+esc(d.r):''}</small><br>
+ ${d.s==='pending'?`<button type="button" class="btn" data-action="approved" data-id="${esc(d.id)}">قبول</button><button type="button" class="btn alt" data-action="rejected" data-id="${esc(d.id)}">رفض</button>`:`<button type="button" class="btn alt" data-action="pending" data-id="${esc(d.id)}">إعادة إلى الانتظار</button>`}<button type="button" class="btn alt" data-action="delete" data-id="${esc(d.id)}">حذف</button></div>`).join('')||(ADMIN_HISTORY?'<p>لا توجد مشاركات سابقة.</p>':'<p>لا توجد مشاركات تنتظر المراجعة.</p>');
  syncBricks();hydrate();refreshExperiences()}
 // Admin actions use delegated clicks, avoiding fragile inline onclick handlers.
 $('#al').addEventListener('click',async e=>{
@@ -873,6 +912,35 @@ document.getElementById('missionAgain').onclick=missionReset;
 
 route();render();
 if(sb){sb.auth.getSession().then(({data})=>chk(data.session));sb.channel('subs').on('postgres_changes',{event:'*',schema:'public',table:'submissions'},()=>load()).subscribe()}
+
+// Dedicated certificate section: not the submission form.
+document.getElementById('certificatePageDownload').addEventListener('click',()=>{
+ if(!lastCertificate){location.hash='#submit';toast('أرسلي بصمتك أولًا لاستخراج شهادة باسمك.');return}
+ showCertificate();
+});
+// Touch drawing studio. The canvas stays entirely local until the visitor submits.
+(function(){
+ const c=document.getElementById('paintCanvas'),ctx=c.getContext('2d'),color=document.getElementById('paintColor'),size=document.getElementById('paintSize');
+ const history=[];let drawing=false,last=null;
+ function blank(){ctx.fillStyle='#fff';ctx.fillRect(0,0,c.width,c.height)}blank();
+ function snapshot(){if(history.length>=15)history.shift();history.push(ctx.getImageData(0,0,c.width,c.height))}
+ function point(e){const r=c.getBoundingClientRect();return {x:(e.clientX-r.left)*c.width/r.width,y:(e.clientY-r.top)*c.height/r.height}}
+ c.addEventListener('pointerdown',e=>{e.preventDefault();snapshot();drawing=true;last=point(e);c.setPointerCapture(e.pointerId);ctx.beginPath();ctx.arc(last.x,last.y,Number(size.value)/2,0,Math.PI*2);ctx.fillStyle=color.value;ctx.fill()});
+ c.addEventListener('pointermove',e=>{if(!drawing)return;e.preventDefault();const p=point(e);ctx.beginPath();ctx.moveTo(last.x,last.y);ctx.lineTo(p.x,p.y);ctx.strokeStyle=color.value;ctx.lineWidth=Number(size.value);ctx.lineCap='round';ctx.lineJoin='round';ctx.stroke();last=p});
+ ['pointerup','pointercancel','lostpointercapture'].forEach(t=>c.addEventListener(t,()=>{drawing=false;last=null}));
+ document.getElementById('paintUndo').onclick=()=>{const prev=history.pop();if(prev)ctx.putImageData(prev,0,0)};
+ document.getElementById('paintClear').onclick=()=>{if(!confirm('مسح اللوحة بالكامل؟'))return;snapshot();blank()};
+ document.getElementById('paintSave').onclick=()=>{const a=document.createElement('a');a.download='لوحتي-لحماة-الوطن.png';a.href=c.toDataURL('image/png');a.click()};
+ document.getElementById('paintSubmit').onclick=()=>{
+  const name=document.getElementById('artistName').value.trim();if(!name){toast('أدخلي اسم المشاركة أولًا.');return}
+  c.toBlob(blob=>{if(!blob){toast('تعذر تجهيز اللوحة.');return}
+   try{const file=new File([blob],'لوحة-حماة-الوطن.png',{type:'image/png'});const dt=new DataTransfer();dt.items.add(file);document.getElementById('ff').files=dt.files;
+    document.getElementById('fn').value=name;document.getElementById('ft').value='رسم فني';document.getElementById('fh').value='لوحة امتنان لحماة الوطن';document.getElementById('fx').value='لوحة فنية تعبيرية من مرسم حماة الوطن.';
+    location.hash='#submit';toast('أُرفقت اللوحة! اختاري الفئة، وافقي على الشروط ثم اضغطي «أرسل بصمتي».');
+   }catch(e){toast('تعذر إرفاق اللوحة تلقائيًا. احفظي الصورة ثم ارفعيها من نموذج المشاركة.')}
+  },'image/png');
+ };
+})();
 </script>
 <script src="cinema.js?v=5"></script>
 <script src="cinema2.js?v=5"></script>
